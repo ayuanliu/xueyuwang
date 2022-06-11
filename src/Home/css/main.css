@@ -68,13 +68,136 @@
         }
 
         .main {
-            height: 1240px;
             transform-style: preserve-3d;
             perspective: 500px;
-            background-color: rgba(0, 0, 0, .3);
+            background-color: rgba(0, 0, 0, .1);
             user-select: none;
             margin-top: 10px;
+            width: 1799px;
+            padding-left: 50px;
+            padding-right: 50px;
         }
+
+        .head{
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid black;
+            border-left: 10px solid rgb(113,148,224);
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .aside{
+            width: 100px;
+            height: 500px;
+            background-color: red;
+            float: right;
+        }
+
+        .mainsection{
+            width: 752px;
+            background: rgba(205, 199, 199, 0.1);
+            text-align: center;
+            border-top: 2px solid red;
+        }
+        .mainsection span{
+            font-weight: 700;
+            font-size: 30px;
+        }
+        .game {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            background-color: rgb(123, 125, 127);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .gameList {
+            position: absolute;
+            width: 2400px;
+        }
+
+        .gameList li {
+            float: left;
+            background-color: rgb(120, 119, 119);
+        }
+
+        .gameList li a {
+            position: relative;
+            display: block;
+            width: 600px;
+            height: 300px;
+        }
+
+        .gameList li .game1 {
+            background-image: url('../image/Pacific\ Thunder.png');
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .gameList li a .pfTd {
+            height: 100px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .gameList li a .play {
+            position: absolute;
+            line-height: 300px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            font-size: 50px;
+            color: rgb(112, 129, 145);
+            text-align: center;
+            font-weight: bold;
+            animation: paly 2s infinite linear;
+        }
+
+        .game-button{
+            position: absolute;
+            margin: 0 auto;
+            background-color: rgb(64, 64, 64);
+        }
+        .game-button li{
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            border-radius: 7px;
+            border: 2px solid white;
+        }
+        .game-button li:hover{
+            width: 12px;
+            height: 12px;
+            margin: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .game-button .selected{
+            background-color: white;
+        }
+        @keyframes paly {
+
+            /* 开始状态 */
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
 
         .page {
             width: 740px;
@@ -82,7 +205,6 @@
             background-color: rgba(118, 118, 118, .5);
             transition: 2s;
             border: 6px dotted rgb(152, 113, 113);
-            margin: 0 auto;
         }
 
         .page .iconfont {
@@ -117,75 +239,4 @@
             transform: rotateY(0);
             box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
             background-image: linear-gradient(rgba(141, 149, 139, 0.5), rgba(174, 206, 168, 0.2));
-        }
-
-
-        .game {
-            position: relative;
-            width: 600px;
-            height: 300px;
-            margin: 0 auto;
-            background-color: rgb(123, 125, 127);
-            overflow: hidden;
-        }
-
-        .game .gameList {
-            position: absolute;
-            width: 2400px;
-        }
-
-        .game li {
-            float: left;
-            background-color: rgb(120, 119, 119);
-        }
-
-        .game li a {
-            position: relative;
-            display: block;
-            width: 600px;
-            height: 300px;
-        }
-
-        .game li .game1 {
-            background-image: url('../image/Pacific\ Thunder.png');
-            background-position: center;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .game li a .pfTd {
-            height: 100px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .game li a .play {
-            position: absolute;
-            line-height: 300px;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            font-size: 50px;
-            color: rgb(112, 129, 145);
-            text-align: center;
-            font-weight: bold;
-            animation: paly 2s infinite linear;
-        }
-
-        @keyframes paly {
-
-            /* 开始状态 */
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-
-            100% {
-                transform: scale(1)
-            }
         }

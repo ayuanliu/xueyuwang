@@ -6,7 +6,7 @@ window.onload = function () {
 
     // 网页最佳位置
     // 当页面移到某个位置时则需要滚轮滚动很长距离才能继续移动
-    document.onwheel = function(event){
+    document.onwheel = function (event) {
         event.preventDefault();
     }
 
@@ -15,61 +15,54 @@ window.onload = function () {
     var gameList = document.getElementById('gameList');
     var gameArr = gameList.children;
     var distance = gameList.offsetWidth / gameArr.length;
+    var gameButton = document.getElementById('gameButton');
+    var lis = new Array();
+    var buttonNum = gameArr.length;
+    var index = 0;
+    var autoPlayTimer;
+    // 根据图片的个数创建按钮的个数
+    for (let i = 0; i < buttonNum - 1; i++) {
+        lis[i] = document.createElement('li');
+        gameButton.appendChild(lis[i]);
+        lis[i].onclick = function(){
+            lis.forEach((li)=>{
+                li.className = '';
+            })
+            lis[i].className = 'selected';
+            index = i;
+            // 关闭自动播放
+            clearInterval(autoPlayTimer);
+            move(gameList, 'left', -i * distance, 10,function(){
+                // 打开自动播放
+                autoChange();
+            })
+        }
+    }
+    lis[0].className = 'selected';
+    gameButton.style.width = buttonNum*18 + "px";
+    // 按钮放的位置
+    gameButton.style.left = 0;
+    gameButton.style.right = 0;
+    gameButton.style.top = 250 + "px";
+    
+    // 自动切换
     autoChange();
     function autoChange() {
-        let index = 0;
-        setInterval(function () {
-            index++;  
-            move(gameList,'left',-index*distance,10,function(){
-                if(index >= gameArr.length - 1){
+        // index = 0;
+        autoPlayTimer = setInterval(function () {
+            index++;
+            move(gameList, 'left', -index * distance, 10, function () {
+                if (index >= gameArr.length - 1) {
                     index = 0;
                     gameList.style['left'] = 0;
                 }
+                // 移动完图片后移动按钮
+                for(let i = 0; i < buttonNum - 1; i++){
+                    lis[i].className = '';
+                }
+                lis[index].className = 'selected';
             });
-            
+
         }, 5000);
     }
 }
-
-
-
-
-// /* 
-//     obj: 要改变样式的元素
-//     attr: 要改变的样式
-//     target: 改变的最终结果
-//     speed: 改变的速度
-//     callback: 回调函数
-// */
-// function move(obj, attr, target, speed, callback) {
-//     clearInterval(obj.timer)        //没有则会返回undefined
-//     // 判断speed的正负
-//     var current = parseInt(getStyle(obj,attr));
-//     if(current > target){
-//         speed = -speed;
-//     }
-//     obj.timer = setInterval(function(){
-//         let oldValue = parseInt(getStyle(obj,attr));
-//         let newValue = oldValue + speed + 'px';
-//         if(speed > 0 && newValue >= target || speed < 0 && newValue <= target){
-//             newValue = target;
-//         }
-//         obj.style[attr] = newValue;
-//         if(newValue == target){
-//             clearInterval(obj.timer);
-//             callback && callback();
-//         }
-//     },30);
-// }
-// /*
-//     obj: 要获取样式的元素
-//     name: 要获取样式的名称
-// */
-// function getStyle(obj, name) {
-//     // getComputdedStyle获取某个元素的所有样式
-//     if(window.getComputedStyle){
-//         return window.getComputedStyle(obj,null)[name];
-//     }else{
-//         return obj.currentStyle()[name];
-//     }
-// }
