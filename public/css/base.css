@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+/* 清除浮动 */
+.clearfix::before,
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+/* 设置一个公共的最大宽度 */
+.sharing-width{
+   width: 1899px; 
+   margin: 0 auto;
+}
