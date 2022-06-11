@@ -1,0 +1,65 @@
+.mainbox{
+    position: absolute;
+    width: 1200px;
+    height: 850px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.myHtml{
+    width: 380px;
+    height: 400px;
+    padding-left: 20px;
+    font-size: 20px;
+    box-shadow: 1px 1px 5px rgba(70, 65, 65,.5);
+    border-radius: 40px;
+    resize: none;
+    outline: none;
+    background-color: rgba(123, 136, 142, 0.5);
+    overflow: hidden;
+}
+
+.htmlExplain{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    top: 0;
+    right: 0;
+    border-radius: 40px;
+    box-shadow: 2px 2px 5px rgb(125, 115, 115);
+    background-color: rgba(123, 123, 143, 0.5);
+}
+.htmlExplain div{
+    position: absolute;
+    width: 80px;
+    line-height: 18px;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 10px;
+}
+.htmlExplain div:not(:first-child){
+    height: 0;
+}
+.flow{
+    position: absolute;
+    width: 600px;
+    height: 200px;
+    bottom: 100px;
+    left: 0;
+    background-color: rgba(255, 255, 0,.5);
+}
+.rendering{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 128, 0,.5);
+}

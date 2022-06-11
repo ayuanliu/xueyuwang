@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/07队列.js"></script>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+    document.body.style.zoom = 0.8;
+    // 获取用户头像按钮
+    var userImg = document.getElementById("userImg");
+    bind(userImg, "click", function () {
+        alert("你好");
+    });
+
+    upbtnAdownbtn();
+
+    // 为PUSH和POP添加单击响应事件
+    pushApop();
+
+}
+
+/* 为对象添加一个事件 */
+function bind(obj, eventStr, callback) {
+    if (obj.addEventListener) {
+        obj.addEventListener(eventStr, callback, false);
+    } else {
+        obj.attachEvent("on" + eventStr, function () {
+            callback.call(obj);
+        });
+    }
+
+}
+
+
+
+// 为PUSH和POP添加单击响应事件
+function pushApop() {
+    // 创建一个数组用来作为栈
+    var arrStack = new Array();
+    // 创建一个数组用来作为队列
+    var arrQueue = new Array();
+    // 获取到栈盒子用来作为演示栈
+    var memory = document.getElementById("memory");
+    // 获取到队列盒子
+    var qMemory = document.getElementById("qMemory");
+    // 获取到栈顶指针箭头
+    var arrowhead = document.getElementById("arrowhead");
+    // 获取到文本框
+    var content = document.getElementById("content");
+    // 获取到SP文本框
+    var valueSP = document.getElementById("valueSP").firstElementChild;
+    var maxIndex = 5;
+    var index = -1;
+    var front = 0;
+    var rear = 0;
+    var flag = 0;
+    var ifButton = 0;
+
+    valueSP.innerHTML = index;
+
+    // 初始化
+    // 给队列装好数据
+    for (var i = 0; i < maxIndex; i++) {
+        // 创建li盒子给队列作为等待添加数据 
+        var datali = document.createElement("li");
+        var dataimg = document.createElement("img");
+        dataimg.src = "../img/栈图/data" + i + ".png";
+        datali.appendChild(dataimg);
+        datali.style.right = 80 * i + "px";
+        arrQueue[i] = datali;
+        qMemory.appendChild(arrQueue[i]);
+    }
+    // 队列满
+    rear = i - 1;
+    front = rear;
+    flag = 1;
+
+    // 获取PUSH按钮
+    var btnPush = document.getElementById("btnPush");
+    btnPush.onclick = function () {
+        /* 
+            每点击一下PUSH按钮
+                1. 判断栈是否满(栈没满则继续)
+                2. 判断队列是否空(队列没空则继续)
+                3. index + 1    //栈顶指针加1
+                4. front + 1  flag = 0  //队尾指针加1 表示此时可能为空
+                5. 将队列中的一个数据入栈
+        */
+        if (ifButton) {
+            return false;
+        }
+
+        // 判断栈是否满(栈没满则继续)
+        if (index == maxIndex - 1) {
+            content.innerHTML = "栈满,请点击POP按钮弹出数据!";
+            // 栈满不允许在执行下面代码
+            return false;
+        }
+
+        // 判断队列是否空(没空则继续)
+        if (front == rear && flag == 0) {
+            // 队列满不允许执行下面代码
+            return false;
+        }
+        ifButton = 1;
+        // 栈顶指针加1
+        index++;
+        content.innerHTML = "压栈: 先将栈顶指针加1,SP = SP + 1,再将数据存入SP指向的地址空间";
+        valueSP.innerText = index;
+        if (index == 4) {
+            content.innerHTML = "栈为满";
+        }
+        // 执行栈顶指针加1动画
+        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) - 80, 4);
+        // 队尾指针加1
+        front++;
+
+
+        if (front == maxIndex) {
+            front = 0;
+        }
+
+
+
+        // 将队列中的一个数据入栈
+        arrStack[index] = arrQueue[front];
+        // console.log("push"+"front="+front+"rear="+rear);
+        var value = rear - front;
+        if (value < 0) {
+            value = maxIndex + value;
+        }
+        else if (value == 0 && flag == 1) {
+            value = 4;
+        }
+        // value为元素个数
+        for (var i = front + 1; i < front + value + 1; i++) {
+            var num = i;
+            if (num >= maxIndex) {
+                num = num - maxIndex;
+            }
+            move(arrQueue[num], "right", parseInt(getStyle(arrQueue[num], "right")) - 80, 4);
+        }
+
+        // 将压入栈中的数据显示,局部变量保证只在本函数有效
+        var tempi = index;
+        move(arrStack[tempi], "width", 0, 4, function () {
+            memory.appendChild(arrStack[tempi]);
+            move(arrStack[tempi], "width", 80, 4, function () {
+                move(arrStack[tempi], "top", 80 * (maxIndex - tempi - 1), 16, function () {
+                    ifButton = 0;
+                })
+            });
+        })
+
+        // front增加说明此时队列可能为空不可能为满
+        flag = 0;
+    }
+
+    // 获取POP按钮
+    var btnPop = document.getElementById("btnPop");
+    btnPop.onclick = function () {
+        /* 
+            每点击一下POP按钮
+                1. 判断栈是否空(栈没空则继续)
+                2. 将栈中的一个数据入队
+                3. index - 1    //栈顶指针减1
+        */
+        if (ifButton) {
+            return false;
+        }
+
+
+        // 判断栈是否空(栈没空则继续)
+        if (index == -1) {
+            content.innerHTML = "栈为空,请点击PUSH按钮添加数据!";
+            // 栈空不允许执行下面代码
+            return false;
+        }
+
+        // 判断队列是否满(没满则继续)
+        if (rear == front && flag == 1) {
+            // 队列满不允许执行下面代码
+            return false;
+        }
+        ifButton = 1;
+        rear++;
+        // rear增加说明此时队列可能为满不可能空
+        flag = 1;
+        if (rear == maxIndex) {
+            rear = 0;
+        }
+
+        // 将栈中的一个数据入队
+        arrQueue[rear] = arrStack[index];
+
+        // 局部变量保证只在本函数有效
+        var tempi = index;
+
+        // 栈顶指针减1
+        index--;
+        valueSP.innerText = index;
+        content.innerHTML = "弹栈: 先将SP指向的地址空间中的数据移出栈,再将栈顶指针减1 SP = SP - 1"
+        if (index == -1) {
+            content.innerHTML = "栈为空";
+        }
+        // 执行栈顶指针减1动画
+        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) + 80, 4);
+        move(arrStack[tempi], "top", -80, 16, function () {
+            move(arrStack[tempi], "width", 0, 4, function () {
+                qMemory.appendChild(arrStack[tempi]);
+                arrStack[tempi].style.top = 0;
+                // 根据rear与front的值重新排序
+                var value = rear - front;
+                if (value > 0) {
+                    value = value - 1;
+                } else if (value < 0) {
+                    value = maxIndex + value - 1;
+                } else {
+                    value = 4;
+                }
+                arrStack[tempi].style.right = value * 80 + "px";
+                move(arrStack[tempi], "width", 80, 4, function () {
+                    ifButton = 0;
+                });
+            })
+        });
+
+
+    }
+}
+
+/*               取小值往上加区分正负                 */
+
+// 为上滑和下滑按钮添加单击响应事件
+function upbtnAdownbtn() {
+    // 获取到列表
+    var mcontent = document.getElementById("mcontent");
+    // 获取列表框
+    var middle = mcontent.parentElement;
+
+
+    if (mcontent.offsetHeight - middle.offsetHeight <= 0) {
+        var upbtn = document.getElementById("upbtn");
+        var downbtn = document.getElementById("downbtn");
+        upbtn.innerHTML = "";
+        downbtn.innerHTML = "";
+    } else {
+        // 获取上滑按钮
+        var upbtn = document.getElementById("upbtn");
+        upbtn.flag1 = 0;
+        upbtn.flag2 = 0;
+        bind(upbtn, "mousedown", function (event) {
+            event = event || window.event;
+            upbtn.timer = setInterval(function () {
+                // 先判断是否能上滑
+                if (-parseInt(mcontent.style.top) >= mcontent.offsetHeight - middle.offsetHeight || mcontent.offsetHeight - middle.offsetHeight <= 0) {
+                    if (!upbtn.flag2) {
+                        // if(middle.offsetHeight-mcontent.offsetHeight > 0){
+                        // move(mcontent,"top",mcontent.offsetHeight-middle.offsetHeight,1);
+                        // }else if(middle.offsetHeight-mcontent.offsetHeight < 0){
+                        // move(mcontent,"top",middle.offsetHeight-mcontent.offsetHeight,1);
+                        // }
+                        // 改变上滑按钮的内容
+                        upbtn.innerHTML = "已到底部";
+                        upbtn.flag2 = 1;
+                    }
+                    return false;
+                }
+                if (!upbtn.flag1) {
+                    downbtn.innerHTML = "点击下滑";
+                    upbtn.flag1 = 1;
+                    downbtn.flag1 = 0;
+                    upbtn.flag2 = 0;
+                }
+
+                // 列表上滑
+                move(mcontent, "top", parseInt(parseInt(getStyle(mcontent, "top")) / 100) * 100 - 100, 8);
+            }, 30);
+            event.preventDefault && event.preventDefault();
+        });
+        bind(upbtn, "mouseup", function () {
+            if (upbtn.timer) {
+                clearInterval(upbtn.timer)
+            }
+        });
+        bind(upbtn, "mouseleave", function () {
+            if (upbtn.timer) {
+                clearInterval(upbtn.timer)
+            }
+        });
+
+        // 获取下滑按钮
+        var downbtn = document.getElementById("downbtn");
+        downbtn.flag1 = 0;
+        downbtn.flag2 = 0;
+        bind(downbtn, "mousedown", function (event) {
+            event = event || window.event;
+            downbtn.timer = setInterval(function () {
+                // 先判断是否能下滑
+                if (parseInt(mcontent.style.top) >= 0 || !parseInt(mcontent.style.top)) {
+                    if (!downbtn.flag2) {
+                        // move(mcontent,"top",0,1);
+                        downbtn.innerHTML = "已到顶部";
+                        downbtn.flag2 = 1;
+                    }
+                    return false;
+                }
+                if (!downbtn.flag1) {
+                    console.log("带你就");
+                    upbtn.innerHTML = "点击上滑";
+                    upbtn.flag1 = 0;
+                    downbtn.flag1 = 1;
+                    downbtn.flag2 = 0;
+                }
+                // 列表下滑
+                move(mcontent, "top", Math.floor(parseInt(getStyle(mcontent, "top")) / 100) * 100 + 100, 8);
+            }, 30);
+            event.preventDefault && event.preventDefault();
+        });
+
+        bind(downbtn, "mouseup", function () {
+            if (downbtn.timer) {
+                clearInterval(downbtn.timer);
+            }
+        });
+        bind(downbtn, "mouseleave", function () {
+            if (downbtn.timer) {
+                clearInterval(downbtn.timer);
+            }
+        });
+    }
+
+
+
+}
+
+
+// 对队列进行操作
+/*
+    参数:
+        arrQueue 要读取的队列
+        front 队尾指针
+        rear 队头指针
+*/
+function readQueue(arrQueue, front, rear) {
+}
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/base.css">
+    <link rel="stylesheet" href="../CSS/baseMain.css">
+    <script src="../JS/02Tools.js"></script>
+    <script src="../JS/baseMain.js"></script>
+    <script src="../JS/TodoList.js"></script>
+    <style>
+        header {
+            background-color: black;
+        }
+
+        section {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            width: 100px;
+            line-height: 50px;
+            font-size: 24px;
+            color: #DDD;
+            cursor: pointer;
+        }
+
+        .title {
+            float: right;
+            width: 364px;
+            height: 24px;
+            margin-top: 12px;
+            text-indent: 10px;
+            /* 文本块中首行缩进10px */
+            outline: none;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.24), 0 1px 6px rgba(0, 0, 0, 0.45) inset;
+            /* inset将外部阴影(outset)改为内部阴影这里第一个为外部阴影第二个为内部阴影 */
+        }
+
+        h2 {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        span {
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            display: inline-block;
+            padding: 0 5px;
+            height: 20px;
+            border-radius: 20px;
+            background: #E6E6FA;
+            line-height: 22px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        li {
+            height: 32px;
+            line-height: 32px;
+            background: rgb(242, 242, 242);
+            position: relative;
+            margin-bottom: 10px;
+            padding: 0 45px;
+            border-radius: 3px;
+            border-left: 5px solid #629A9C;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+        }
+
+        li input {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        ul li{
+            border-left: 5px solid rgb(179,179,179);
+            background-color: rgb(207, 207, 207);
+        }
+        footer {
+            text-align: center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="h-nav sharing-width clearfix">
+            <div class="currentPage">
+                数据结构
+            </div>
+            <div class="home">
+                <a href="../HTML/main.html">
+                    <img src="../img/导航栏图/home.png" alt="">
+                </a>
+            </div>
+            <div id="user" class="user">
+                <div id="userImg" class="userImg"><img src="../img/用户头像图/yuanliu.jpg" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="main sharing-width">
+        <div class="lf-nav">
+            <div class="lf-nav-style upline">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line line3"></div>
+            </div>
+            <div><a id="upbtn" class="upbtn" href="javascript:;">点击上滑</a></div>
+            <div id="middle" class="middle">
+                <div id="mcontent" class="mcontent">
+                    <a href="">TodoList</a>
+                </div>
+            </div>
+            <div><a id="downbtn" class="downbtn" href="javascript:;">点击下滑</a></div>
+            <div class="lf-nav-style downline">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div id="showbox" class="showbox">
+            <header>
+                <section>
+                    <!-- 语义化标签表示部分,节,区段 -->
+                    <label for="title">ToDoList</label><input type="text" id="title" class="title" placeholder="添加ToDo">
+                </section>
+            </header>
+            <section>
+                <h2>正在进行<span id="todocount" class="todocount">0</span></h2>
+                <ol id="todolist" class="todolist">
+                    <li><input type="checkbox"><p>nihao</p></li>
+                    
+                </ol>
+                <h2>已经完成<span id="donecount" class="donecount">0</span></h2>
+                <ul id="donecount" class="donecount">
+                    <li><input type="checkbox"><p>nihao</p></li>
+                </ul>
+            </section>
+            <footer>Copyright © 2014 todolist.cn</footer>
+        </div>
+    </div>
+</body>
+
+</html>
