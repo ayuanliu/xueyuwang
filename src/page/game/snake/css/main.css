@@ -1,0 +1,53 @@
+.main-scene {
+    position: relative;
+    width: 1000px;
+    height: 700px;
+    border: 1px solid red;
+    background-color: gray;
+}
+.wall {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-image: url('../image/wall.png');
+}
+
+.snake-head {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background-image: url('../image/head.png');
+    background-size: contain;
+}
+
+.snake-body1,.snake-body2,.snake-body3,.snake-body4,
+.snake-body5,.snake-body6,.snake-body7{
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background-size: contain;
+}
+.snake-body1{
+    /* background-color: rgb(55,191,87); */
+    background-color: red;
+}
+.snake-body2{
+    background-color: orange;
+}
+.snake-body3{
+    background-color: yellow;
+}
+.snake-body4{
+    background-color: green;
+}
+.snake-body5{
+    background-color: cyan;
+}
+.snake-body6{
+    background-color: blue;
+}
+.snake-body7{
+    background-color: purple;
+}
