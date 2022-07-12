@@ -1,7 +1,7 @@
 window.onload = function () {
     //所有数据结构页面初始化必备 
-/**************************************************************/
-    document.body.style.zoom = 0.8;
+    /**************************************************************/
+    // document.body.style.zoom = 0.8;
     // 获取用户头像按钮
     var userImg = document.getElementById("userImg");
     bind(userImg, "click", function () {
@@ -13,12 +13,15 @@ window.onload = function () {
     upbtnAdownbtn();
     // 点击左侧按钮区的按钮
     // buttonClick();
-/**************************************************************/
+    /**************************************************************/
 
     // 为PUSH和POP添加单击响应事件
     pushApop();
-
-
+    // 为滚动条添加响应事件
+    var height = document.querySelector('.header').offsetHeight;
+    document.addEventListener('scroll',function(e){
+        // document.documentElement.scrollTop = height;
+    })
 }
 // 为PUSH和POP添加单击响应事件
 function pushApop() {
@@ -47,7 +50,7 @@ function pushApop() {
         var dataimg = document.createElement("img");
         dataimg.src = "./image/data" + i + ".png";
         datali.appendChild(dataimg);
-        datali.style.right = 80 * i + "px";
+        datali.style.right = 64 * i + "px";
         queue.writeQueue(datali);
         qMemory.appendChild(datali);
     }
@@ -87,7 +90,7 @@ function pushApop() {
         }
 
         // 执行栈顶指针加1动画
-        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) - 80, 4);
+        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) - 64, 4);
         valueSP.innerText = stack.index;
 
 
@@ -99,13 +102,13 @@ function pushApop() {
             if (num >= maxIndex) {
                 num = num - maxIndex;
             }
-            move(queue.queueArr[num], "right", parseInt(getStyle(queue.queueArr[num], "right")) - 80, 4);
+            move(queue.queueArr[num], "right", parseInt(getStyle(queue.queueArr[num], "right")) - 64, 4);
         }
 
         move(stack.readStack(stack.index), "width", 0, 4, function () {
             memory.appendChild(stack.readStack(stack.index));
-            move(stack.readStack(stack.index), "width", 80, 4, function () {
-                move(stack.readStack(stack.index), "top", 80 * (maxIndex - stack.index - 1), 16, function () {
+            move(stack.readStack(stack.index), "width", 64, 4, function () {
+                move(stack.readStack(stack.index), "top", 64 * (maxIndex - stack.index - 1), 16, function () {
                     ifButton = 0;
                 })
             });
@@ -152,16 +155,16 @@ function pushApop() {
             content.innerHTML = "栈为空";
         }
         // 执行栈顶指针减1动画
-        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) + 80, 4);
+        move(arrowhead, "top", parseInt(getStyle(arrowhead, "top")) + 64, 4);
 
 
-        move(stack.readStack(stack.index + 1), "top", -80, 16, function () {
+        move(stack.readStack(stack.index + 1), "top", -64, 16, function () {
             move(stack.readStack(stack.index + 1), "width", 0, 4, function () {
                 qMemory.appendChild(stack.readStack(stack.index + 1));
                 stack.readStack(stack.index + 1).style.top = 0;
                 let value = queue.getNum() - 1;
-                stack.readStack(stack.index + 1).style.right = value * 80 + "px";
-                move(stack.readStack(stack.index + 1), "width", 80, 4, function () {
+                stack.readStack(stack.index + 1).style.right = value * 64 + "px";
+                move(stack.readStack(stack.index + 1), "width", 64, 4, function () {
                     ifButton = 0;
                 });
             })

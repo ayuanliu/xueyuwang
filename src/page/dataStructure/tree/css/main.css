@@ -1,7 +1,7 @@
 .mainbox{
     position: absolute;
-    width: 1200px;
-    height: 850px;
+    width: 960px;
+    height: 680px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -9,12 +9,12 @@
     margin: auto;
 }
 .myHtml{
-    width: 380px;
-    height: 400px;
-    padding-left: 20px;
-    font-size: 20px;
+    width: 304px;
+    height: 320px;
+    padding-left: 16px;
+    font-size: 16px;
     box-shadow: 1px 1px 5px rgba(70, 65, 65,.5);
-    border-radius: 40px;
+    border-radius: 32px;
     resize: none;
     outline: none;
     background-color: rgba(123, 136, 142, 0.5);
@@ -23,17 +23,17 @@
 
 .htmlExplain{
     position: absolute;
-    width: 600px;
-    height: 400px;
+    width: 480px;
+    height: 320px;
     top: 0;
     right: 0;
-    border-radius: 40px;
+    border-radius: 32px;
     box-shadow: 2px 2px 5px rgb(125, 115, 115);
     background-color: rgba(123, 123, 143, 0.5);
 }
 .htmlExplain div{
     position: absolute;
-    width: 80px;
+    width: 64px;
     line-height: 18px;
     top: 0;
     left: 0;
@@ -49,16 +49,16 @@
 }
 .flow{
     position: absolute;
-    width: 600px;
-    height: 200px;
-    bottom: 100px;
+    width: 480px;
+    height: 160px;
+    bottom: 80px;
     left: 0;
     background-color: rgba(255, 255, 0,.5);
 }
 .rendering{
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 320px;
+    height: 320px;
     bottom: 0;
     right: 0;
     background-color: rgba(0, 128, 0,.5);

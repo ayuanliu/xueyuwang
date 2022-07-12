@@ -1,9 +1,11 @@
 window.onload = function () {
-    document.body.style.zoom = 0.8;
+    // document.body.style.zoom = 0.8;
 
+    user();
+    registerBtn()
     userBtn();
     admine();
-
+    login();
     // 网页最佳位置
     // 当页面移到某个位置时则需要滚轮滚动很长距离才能继续移动
     document.onwheel = function (event) {

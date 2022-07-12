@@ -1,9 +1,15 @@
 .main-scene {
     position: relative;
-    width: 1000px;
+    width: 1500px;
     height: 700px;
     border: 1px solid red;
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.score{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 9999;
 }
 .wall {
     position: absolute;
@@ -27,10 +33,8 @@
     width: 36px;
     height: 36px;
     border-radius: 18px;
-    background-size: contain;
 }
 .snake-body1{
-    /* background-color: rgb(55,191,87); */
     background-color: red;
 }
 .snake-body2{
@@ -50,4 +54,119 @@
 }
 .snake-body7{
     background-color: purple;
+}
+
+
+.food1,.food2,.food3,.food4,
+.food5,.food6,.food7,.food8,
+.food9,.food10,.food11,.food12,
+.food13,.food14,.food15,.food16,
+.food17,.food18,.food19,.food20,
+.food21,.food22,.food23,.food24,
+.food25,.food26,.food27,.food28,
+.food29,.food30,.food31,.food32{
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+}
+.food1{
+    background-image: url('../image/food.png');
+    background-position: -5px -2px;
+}
+.food2{
+    background-image: url('../image/food.png');
+    background-position: -38px -2px;
+}
+.food3{
+    background-image: url('../image/food.png');
+    background-position: -69px -2px;
+}
+.food4{
+    background-image: url('../image/food.png');
+    background-position: -101px -1px;
+}
+.food5{
+    background-image: url('../image/food.png');
+    background-position: -129px 1px;
+}
+.food6{
+    background-image: url('../image/food.png');
+    background-position: -5px -35px;
+}
+.food7{
+    background-image: url('../image/food.png');
+    background-position: -38px -35px;
+}
+.food8{
+    background-image: url('../image/food.png');
+    background-position: -71px -35px;
+}
+.food9{
+    background-image: url('../image/food.png');
+    background-position: -100px -35px;
+}
+.food10{
+    background-image: url('../image/food.png');
+    background-position: -127px -35px;
+}
+.food11{
+    background-image: url('../image/food.png');
+    background-position: -5px -75px;
+}
+.food12{
+    background-image: url('../image/food.png');
+    background-position: -39px -75px;
+}
+.food13{
+    background-image: url('../image/food.png');
+    background-position: -71px -74px;
+}
+.food14{
+    background-image: url('../image/food.png');
+    background-position: -104px -72px;
+}
+.food15{
+    background-image: url('../image/food.png');
+    background-position: -129px -73px;
+}
+.food16{
+    background-image: url('../image/food.png');
+    background-position: -7px -115px;
+}
+.food17{
+    background-image: url('../image/food.png');
+    background-position: -41px -115px;
+}
+.food18{
+    background-image: url('../image/food.png');
+    background-position: -72px -109px;
+}
+.food19{
+    background-image: url('../image/food.png');
+    background-position: -102px -109px;
+}
+.food20{
+    background-image: url('../image/food.png');
+    background-position: -132px -110px;
+}
+.food21{
+    background-image: url('../image/food.png');
+    background-position: -8px -148px;
+}
+.food22{
+    background-image: url('../image/food.png');
+    background-position: -44px -147px;
+}
+.food23{
+    background-image: url('../image/food.png');
+    background-position: -76px -147px;
+}
+.food24{
+    background-image: url('../image/food.png');
+    background-position: -107px -147px;
+}
+.food25{
+    background-image: url('../image/food.png');
+    background-position: -7px -115px;
 }

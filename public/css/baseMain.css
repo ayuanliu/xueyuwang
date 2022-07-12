@@ -34,28 +34,56 @@
     height: 70px;
 }
 .header .user{
+    position: relative;
     float: right;
     width: 100px;
     height: 100px;
-    background-color: rgba(160, 160, 160, 0.2);    
+    background-color: rgb(121,121,121);
 }
-.header .userImg{
-    float: left;
-    margin-top: 17px;
-    margin-left: 30px;
+.icon-linecar105{
+    position: absolute;
+    font-size: 20px;
+    top: 40px;
+    left: -1px;
+    z-index: 999;
+}
+.header .userImgBg{
+    position: absolute;
     width: 65px;
     height: 65px;
+    top: 0;
+    right: 0;
+    left: auto;
+    background-color: rgb(121,121,121);
+    z-index: 99;
+}
+.header .userImg{
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    top: 17px;
+    right: 16px;
+    left: auto;
     border-radius: 50px;
+    background-color: rgb(121,121,121);
     overflow: hidden;
-    outline: medium solid rgb(0, 0, 0,.4);
+    outline: medium solid rgb(0, 0, 0);
+    z-index: 99;
 }
 .header .userImg:hover{
     cursor: pointer;
     outline: medium solid rgba(255, 255, 255, 0.5);
 }
 .header .userImg img{
-    width: 100%;
-    
+    width: 100%;  
+}
+.header .register{
+    position: absolute;
+    width: 100px;
+    line-height: 100px;
+    font-size: 20px;
+    text-indent: 20px;
+    display: none;
 }
 .header .userName{
     float: left;
@@ -72,7 +100,7 @@
 .main{
     margin-top: 10px;
     background-color: rgba(97, 91, 92,.5);
-    background-image: url("../img/展示区图/main_bgc.png");
+    /* background-image: url("../img/展示区图/main_bgc.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     user-select: none;
@@ -80,22 +108,22 @@
 .main .lf-nav{
     position: relative;
     float: left;
-    width: 200px;
-    height: 900px;
+    width: 160px;
+    height: 720px;
     background-color: rgba(0, 0, 0, 0.4);
     /* border-left: 5px solid red; */
 }
 .main .lf-nav .downline{
     position: absolute;
-    height: 36px;
-    width: 160px;
-    top: 864px;
+    height: 25px;
+    width: 128px;
+    top: 683px;
     left: 0;
     right: 0;
     margin: 0 auto;
 }
 .main .lf-nav .line{
-    width: 150px;
+    width: 120px;
     border:5px solid rgba(0, 0, 0, 0.4);
     margin: 0 auto;
     margin-bottom: 3px;
@@ -107,9 +135,9 @@
 }
 .main .lf-nav .upbtn,
 .main .lf-nav .downbtn{
-    width: 200px;
-    height: 62px;
-    line-height: 62px;
+    width: 160px;
+    height: 48px;
+    line-height: 48px;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -120,12 +148,12 @@
 }
 .main .lf-nav .downbtn{
     position: absolute;
-    top: 800px;
+    top: 634px;
     border: none;
 }
 .main .lf-nav .middle{
     position: relative;
-    width: 200px;
+    width: 160px;
     height: 700px;
     overflow: hidden;
 }
@@ -138,7 +166,7 @@
 }
 .main .lf-nav a{
     display: block;
-    width: 190px;
+    width: 152px;
     margin: 0 auto;
     line-height: 98px;
     font-size: 50px;
@@ -164,29 +192,29 @@
 .main .showbox{
     position: relative;
     width: 80%;
-    height: 896px;
-    margin-left: 200px;
+    height: 716px;
+    margin-left: 160px;
     background-color: rgba(0, 0, 0, 0.3);
     border: 2px solid black;    
 }
 .main .buttonbox{
     float: right;
-    width: 176px;
-    height: 900px;
+    width: 140px;
+    height: 720px;
     background-color: rgba(0, 0, 0, 0.4);
 }
 .main .btn{
     display: block;
-    width: 150px;
-    height: 100px;
-    font-size: 30px;
+    width: 120px;
+    height: 80px;
+    font-size: 24px;
     font-weight: bold;
     margin: 80px auto 0;
     color: rgb(188, 189, 189);
     background-color: rgba(48, 101, 199, 0.7);
     cursor: pointer;
     box-shadow: 2px 2px 5px rgb(0, 0, 0);
-    border-radius: 40px;
+    border-radius: 32px;
 }
 .main .btn:hover{
     color: #fff;

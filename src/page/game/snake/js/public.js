@@ -1,5 +1,14 @@
 // 公共数据
 /*--------------------------------------------------------*/
+/*
+    游戏界面的数据
+        mainScene           游戏主窗口
+*/
+var mainScene = null;
+var mainSceneWidth = 0;
+var mainSceneHeight = 0
+/*--------------------------------------------------------*/
+/*--------------------------------------------------------*/
 /*   
     鼠标信息
         pX                  鼠标的横坐标
@@ -25,6 +34,7 @@ var count = 0;
         snakeSize           每一个蛇节大小
         pointSpace          蛇节点间的距离
         snakeSpeed          蛇移动速度(必须能被蛇间距整除)
+        snakeAcceleration   蛇的加速度
 ***************************************
 ********单个节点************************
         directionX          蛇头水平移动的方向
@@ -34,10 +44,11 @@ var count = 0;
         snakeArr            整条蛇的信息(蛇的每一节包括蛇头)
 ***************************************           
 */
-var snakeLength = 15;
+var snakeLength = 8;
 var snakeSize = 36;
 var pointSpace = 20;
 var snakeSpeed = 5;
+var snakeAcceleration = 30;
 var xIncrement = 0;
 var yIncrement = -snakeSpeed;
 var snakeArr = new Array();
@@ -58,7 +69,23 @@ headLocus[headlocusIndex] = new Array();
 */
 var zIndex = 999;
 /*--------------------------------------------------------*/
-
-
-
-
+/*--------------------------------------------------------*/
+/*
+    食物信息
+        foodSize            食物大小
+        foodArr             存放食物的数组
+*/
+var foodSize = 18;
+var foodArr = new Array();
+/*--------------------------------------------------------*/
+/*--------------------------------------------------------*/
+/*
+    定时器
+        ableHasten                      蛇能够加速
+        hasten                          蛇加速
+        TimerSnakeMove                  蛇移动定时器
+*/
+var ableHasten = false;                 
+var hasten = false;
+var TimerSnakeMove = 0;
+/*--------------------------------------------------------*/

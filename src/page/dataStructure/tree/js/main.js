@@ -1,7 +1,7 @@
 window.onload = function () {
     //所有数据结构页面初始化必备 
     /**************************************************************/
-    document.body.style.zoom = 0.8;
+    // document.body.style.zoom = 0.8;
     // 获取用户头像按钮
     var userImg = document.getElementById("userImg");
     bind(userImg, "click", function () {

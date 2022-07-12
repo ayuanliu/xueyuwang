@@ -122,17 +122,35 @@ function upbtnAdownbtn() {
 // }
 
 
-
-
-function userBtn(){
+function user() {
+    let user = document.getElementById('user');
+    let register = document.getElementById('register');
+    user.onmouseenter = function () {
+        register.style.display = 'block';
+        move(user, 'width', 200, 3);
+    }
+    user.onmouseleave = function () {
+        move(user, 'width', 100, 5, function () {
+            register.style.display = 'none';
+        });
+    }
+}
+function registerBtn() {
+    let registerBtn = document.getElementById('register');
+    registerBtn.onclick = function () {
+        // 点击跳转到注册页面
+        location.href = '../../src/register/index.html'
+    }
+}
+function userBtn() {
     var userImg = document.getElementById("userImg");
     var loadingBg = document.getElementById('loadingBg');
-    userImg.onclick = function(){
+    userImg.onclick = function () {
         loadingBg.style.display = 'block';
         return false;
     }
     var loadingClose = document.getElementById('loadingClose');
-    loadingClose.onclick = function(){
+    loadingClose.onclick = function () {
         loadingBg.style.display = 'none';
         return false;
     }
@@ -140,10 +158,32 @@ function userBtn(){
 
 
 
-function admine(){
+function admine() {
     var UserName = document.getElementById('UserName');
+    // 自动获取焦点
     UserName.focus();
-    UserName.onblur = function(){
-        alert("失去焦点");
+    UserName.onfocus = function () {
+        this.placeholder = '';
+    }
+    UserName.onblur = function () {
+        this.placeholder = '请输入账号';
+    }
+    let PassWord = document.getElementById('PassWord');
+    PassWord.onfocus = function () {
+        this.placeholder = '';
+    }
+    PassWord.onblur = function () {
+        this.placeholder = '请输入密码';
+    }
+}
+
+function login() {
+    let loadIn = document.getElementById('loadIn');
+    let UserName = document.getElementById('UserName');
+    let PassWord = document.getElementById('PassWord');
+    loadIn.onclick = function () {
+        let uName = UserName.value;
+        let pW = PassWord.value;
+        // 对账号密码进行验证
     }
 }

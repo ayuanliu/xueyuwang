@@ -1,0 +1,92 @@
+.h-nav{
+    height: 100px;
+}
+.loadingBox {
+    position: absolute;
+    width: 800px;
+    height: 550px;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    margin: auto;
+    background-color: rgb(225, 225, 228);
+}
+
+.loadingBox .loadingClose {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 8px 0;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(235, 230, 230);
+    cursor: pointer;
+}
+
+
+.loadingBox form {
+    width: 400px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.loadingTitle {
+    border-top: 3px solid red;
+    margin: 0 auto;
+    margin-top: 64px;
+    padding-top: 8px;
+    height: 64px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    color: rgb(83, 83, 78);
+}
+
+.loadingInfo{
+    height: 18px;
+    margin-top: 8px;
+    margin-bottom: -26px;
+    text-align: center;
+    color: red;
+    font-size: 10px;
+    background-color: rgb(255, 255, 255);
+    display: none;
+}
+
+.loadingBox .userMsg {
+    margin-top: 40px;
+    width: 320px;
+    font-weight: bold;
+}
+
+
+.loadingBox label {
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.loadingBox input {
+    width: 160px;
+    height: 24px;
+    border: 2px solid black;
+    font-size: 15px;
+    text-indent: 8px;
+}
+
+.loadIn{
+    display: block;
+    width: 96px;
+    height: 32px;
+    font-size: 16px;
+    color:white;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 56px;
+    background-color: rgb(245,43,0);
+    cursor: pointer;
+}

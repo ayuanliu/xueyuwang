@@ -9,62 +9,91 @@
 
         .loadingBox {
             position: absolute;
-            width: 1000px;
-            height: 600px;
+            width: 800px;
+            height: 480px;
+            border-radius: 10px;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
             margin: auto;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(225, 225, 228);
         }
 
         .loadingBox .loadingClose {
             position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 10px 10px 10px 0;
-            font-size: 40px;
+            top: -16px;
+            right: -16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px 8px 8px 0;
+            font-size: 32px;
             font-weight: bold;
             text-align: center;
-            background-color: #fff;
+            background-color: rgb(235, 230, 230);
             cursor: pointer;
+        }
+
+        
+        .loadingBox form {
+            width: 400px;
+            margin: 0 auto;
+            text-align: right;
         }
 
         .loadingTitle {
             border-top: 3px solid red;
             margin: 0 auto;
-            margin-top: 30px;
-            height: 80px;
+            margin-top: 64px;
+            padding-top: 8px;
+            height: 64px;
             text-align: center;
             font-weight: bold;
-            font-size: 50px;
+            font-size: 40px;
             color: rgb(83, 83, 78);
         }
 
-        .loadingBox form {
-            width: 500px;
-            margin: 0 auto;
-            text-align: right;
+        .loadingInfo{
+            height: 23px;
+            margin-top: 10px;
+            margin-bottom: -33px;
+            text-align: center;
+            color: red;
+            background-color: #fff;
+            display: none;
         }
 
         .loadingBox .userMsg {
-            margin-top: 100px;
-            width: 400px;
+            margin-top: 48px;
+            width: 320px;
             font-weight: bold;
         }
 
+
         .loadingBox .label {
-            font-size: 20px;
-            margin-right: 10px;
+            font-size: 16px;
+            margin-right: 8px;
         }
 
         .loadingBox input {
-            width: 200px;
-            height: 30px;
+            width: 160px;
+            height: 24px;
             border: 2px solid black;
+            font-size: 15px;
+            text-indent: 8px;
+        }
+
+        .loadIn{
+            display: block;
+            width: 96px;
+            height: 32px;
+            font-size: 16px;
+            color:white;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-top: 56px;
+            background-color: rgb(245,43,0);
+            cursor: pointer;
         }
 
         .main {
@@ -73,38 +102,40 @@
             background-color: rgba(0, 0, 0, .1);
             user-select: none;
             margin-top: 10px;
-            width: 1799px;
+            width: 1420px;
             padding-left: 50px;
             padding-right: 50px;
         }
 
-        .head{
+        .head {
             margin: 50px auto;
             padding: 30px;
             border-radius: 10px;
             border: 1px solid black;
-            border-left: 10px solid rgb(113,148,224);
+            border-left: 10px solid rgb(113, 148, 224);
             text-align: center;
             font-size: 25px;
         }
 
-        .aside{
+        .aside {
             width: 100px;
             height: 500px;
             background-color: red;
             float: right;
         }
 
-        .mainsection{
+        .mainsection {
             width: 752px;
             background: rgba(205, 199, 199, 0.1);
             text-align: center;
             border-top: 2px solid red;
         }
-        .mainsection span{
+
+        .mainsection span {
             font-weight: 700;
             font-size: 30px;
         }
+
         .game {
             position: relative;
             width: 600px;
@@ -159,12 +190,13 @@
             animation: paly 2s infinite linear;
         }
 
-        .game-button{
+        .game-button {
             position: absolute;
             margin: 0 auto;
             background-color: rgb(64, 64, 64);
         }
-        .game-button li{
+
+        .game-button li {
             float: left;
             width: 10px;
             height: 10px;
@@ -172,16 +204,19 @@
             border-radius: 7px;
             border: 2px solid white;
         }
-        .game-button li:hover{
+
+        .game-button li:hover {
             width: 12px;
             height: 12px;
             margin: 4px;
             border-radius: 8px;
             cursor: pointer;
         }
-        .game-button .selected{
+
+        .game-button .selected {
             background-color: white;
         }
+
         @keyframes paly {
 
             /* 开始状态 */

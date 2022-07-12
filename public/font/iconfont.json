@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1173185",
+      "name": "车巴巴-下拉框箭头1",
+      "font_class": "linecar105",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
       "icon_id": "7749519",
       "name": "16gl-D",
       "font_class": "16gl-D",
