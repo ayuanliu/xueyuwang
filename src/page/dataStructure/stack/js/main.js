@@ -19,8 +19,26 @@ window.onload = function () {
     pushApop();
     // 为滚动条添加响应事件
     var height = document.querySelector('.header').offsetHeight;
-    document.addEventListener('scroll',function(e){
-        // document.documentElement.scrollTop = height;
+    let newScrollTop = 0;
+    let flag = 0;
+    let hasListen = 0;
+    document.addEventListener('scroll', function () {
+        newScrollTop = document.documentElement.scrollTop;
+        if (newScrollTop >= height - 25 && newScrollTop <= height + 25 && flag == 0) {
+            document.documentElement.scrollTop = height;
+            // hasListen保证只会设置一个定时器
+            if (hasListen == 0) {
+                setTimeout(function () {
+                    // 可以滚动滚动条
+                    flag = 1;
+                    hasListen = 0;
+                }, 300);
+                hasListen = 1;
+            }
+        }
+        if (newScrollTop < height - 25 || newScrollTop > height + 25) {
+            flag = 0;
+        }
     })
 }
 // 为PUSH和POP添加单击响应事件

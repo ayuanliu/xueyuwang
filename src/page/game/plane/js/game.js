@@ -146,33 +146,78 @@ function characterMove(obj, speed, up, down, left, right) {
     }
     obj.style.top = obj.offsetTop + (up + down) * speed - borderWidth + "px";
     obj.style.left = obj.offsetLeft + (left + right) * speed - borderWidth + "px";
-
+    let gameOver = 0;
     // 碰撞检测
     for (var i = 0; i < bulletMArr.length; i++) {
-        // 先判断在怪物上面的子弹都未碰撞
+        // 判断怪物发射的子弹都碰撞到角色
         if (obj.offsetTop < bulletMArr[i].offsetTop &&
             obj.offsetTop + obj.offsetHeight > bulletMArr[i].offsetTop &&
             obj.offsetLeft < bulletMArr[i].offsetLeft &&
             obj.offsetLeft + obj.offsetWidth > bulletMArr[i].offsetLeft) {
-            alert("游戏结束");
             // 清除所有的定时器
+            // 角色移动
             clearInterval(characterControlTimer);
+            // 怪物移动
             clearInterval(MoveTimer);
+            // 雨滴特效
             clearInterval(effects);
+            // 结束游戏
+            gameOver = 1;
         }
     }
     // 碰撞检测
     for (var i = 0; i < MonsterArr.length; i++) {
-        // 先判断在怪物上面的子弹都未碰撞
+        // 判断在怪物碰撞到角色
         if (obj.offsetTop < MonsterArr[i].offsetTop + MonsterArr[i].offsetHeight &&
             obj.offsetTop + obj.offsetHeight > MonsterArr[i].offsetTop &&
             obj.offsetLeft < MonsterArr[i].offsetLeft + MonsterArr[i].offsetWidth &&
             obj.offsetLeft + obj.offsetWidth > MonsterArr[i].offsetLeft) {
-            alert("游戏结束");
             // 清除所有的定时器
             clearInterval(characterControlTimer);
             clearInterval(MoveTimer);
             clearInterval(effects);
+            // 结束游戏
+            gameOver = 1;
+        }
+    }
+    // 游戏结束
+    if (gameOver) {
+        // 弹出结束框
+        let gameoverbg = document.querySelector('.gameoverbg');
+        gameoverbg.style.display = "block";
+        let back = document.querySelector('.gameover button')
+        back.onclick = function () {
+            // 清除场景
+            // 怪物清空
+            for (let i = 0; i < MonsterArr.length; i++) {
+                document.body.removeChild(MonsterArr[i]);
+            }
+            // 怪物子弹清空
+            for (let i = 0; i < bulletMArr.length; i++) {
+                document.body.removeChild(bulletMArr[i]);
+            }
+            // 角色移除
+            let character = document.querySelector('.character');
+            document.body.removeChild(character);
+            // 角色子弹清空
+            for (let i = 0; i < bulletArr.length; i++) {
+                document.body.removeChild(bulletArr[i]);
+            }
+            // 雨滴清空
+            for(let i = 0; i < rainArr.length; i++){
+                document.body.removeChild(rainArr[i]);
+            }
+            MonsterArrnum = 0;
+            bulletArr.num = 0;
+            bulletMArr.num = 0;
+            rainArr.num = 0;
+            MonsterArr.length = 0;
+            bulletMArr.length = 0;
+            bulletArr.length = 0;
+            rainArr.length = 0;
+            let startMenu = document.querySelector('.startMenu');
+            gameoverbg.style.display = "none";
+            startMenu.style.display = "block";
         }
     }
 }
