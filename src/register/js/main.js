@@ -102,7 +102,27 @@ function verifyFormat() {
                 }
             }
         }
-        console.log('注册成功');
+        let uName = UserName.value;
+        let pW = PassWord.value;
+        const p = new Promise((resolve, reject) => {
+            // 注册
+            sendAJAX('GET', '/users', undefined, function (result) {
+                let users = JSON.parse(result.data);
+                for (let i = 0; i < users.length; i++) {
+                    if (uName === users[i].uName) {
+                        console.log('账号已存在');
+                        return;
+                    }
+                }
+                resolve();
+            })
+        });
+        p.then((value) => {
+            // 发送POST请求
+            sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}`, function () {
+                console.log('注册成功');
+            })
+        })
     }
 }
 /*

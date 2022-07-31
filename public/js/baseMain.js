@@ -181,9 +181,20 @@ function login() {
     let loadIn = document.getElementById('loadIn');
     let UserName = document.getElementById('UserName');
     let PassWord = document.getElementById('PassWord');
+    let loadingBg = document.getElementById('loadingBg');
     loadIn.onclick = function () {
         let uName = UserName.value;
         let pW = PassWord.value;
-        // 对账号密码进行验证
+        // 获取到所有的用户并且处理数据
+        sendAJAX('GET', '/users',undefined,function (result) {
+            let users = JSON.parse(result.data);
+            for(let i = 0; i < users.length; i++){
+                if(uName === users[i].uName && pW === users[i].pW){
+                    loadingBg.style.display = 'none';
+                    return;
+                }
+            }
+            console.log('账号或密码错误');
+        });
     }
 }
