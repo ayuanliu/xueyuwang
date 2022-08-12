@@ -40,17 +40,17 @@ export function clearMBullet() {
         obj:            角色
         bulletArr:      添加到的数组
 */
-function addbullet(obj, bulletArr) {
+function addbullet(obj, bulletArr, type) {
     // 判断是否能添加子弹
     if (!obj.shootFlag) {
         obj.shootFlag = 1;
         // 开启定时器
-        var timer = setInterval(function () {
+        setTimeout(function () {
             // 创建一个子弹并添加进数组方便管理
             var bullet = document.createElement("div");
             bullet.className = "bullet";
             document.body.appendChild(bullet);
-            // 根据角色当前位置以及方向创建子弹 给每个子弹加定时器用于爆炸
+            // 根据角色当前位置以及方向创建子弹
             if (obj.shootDirectionY == -1 && obj.shootDirectionX == -1) {
                 bullet.DirectionY = -1;
                 bullet.DirectionX = -1;
@@ -92,18 +92,31 @@ function addbullet(obj, bulletArr) {
                 bullet.style.top = obj.offsetTop - bullet.offsetHeight - borderWidth + "px";
                 bullet.style.left = obj.offsetLeft + obj.offsetWidth / 2 - bullet.offsetWidth / 2 - borderWidth + "px";
             }
+
+            // 为子弹添加标记表示什么类型子弹
+            bullet.type = type;
+
+
             bulletArr[bulletArr.length] = bullet;
             obj.shootFlag = 0;
-            clearInterval(timer);
         }, 100);
     }
 }
+// 角色添加普通弹
 export function addCBullet(obj) {
-    addbullet(obj, bulletCArr);
+    addbullet(obj, bulletCArr, 0);
 }
+
+// 角色添加回旋弹
+export function addCConvolutionBullet(obj) {
+    addbullet(obj, bulletCArr, 1);
+}
+
+// 怪物添加子弹
 export function addMBullet(obj) {
-    addbullet(obj, bulletMArr);
+    addbullet(obj, bulletMArr, 0);
 }
+
 // 子弹爆裂
 /* 
     参数:
@@ -123,6 +136,7 @@ function bulletBoom(currentBullet, directionY1, directionX1, directionY2, direct
     document.body.appendChild(bullet);
     bullet.style.top = currentBullet.offsetTop + "px";
     bullet.style.left = currentBullet.offsetLeft + "px";
+    bullet.type = 0;
     bulletCArr.push(bullet);
 
     bullet = document.createElement("div");
@@ -133,6 +147,7 @@ function bulletBoom(currentBullet, directionY1, directionX1, directionY2, direct
     document.body.appendChild(bullet);
     bullet.style.top = currentBullet.offsetTop + "px";
     bullet.style.left = currentBullet.offsetLeft + "px";
+    bullet.type = 0;
     bulletCArr.push(bullet);
 }
 /*--------------------------------------------------------*/
@@ -181,7 +196,6 @@ export function bulletIsBoom(bullet, distance) {
     }
 }
 
-
 // 显示子弹
 /*--------------------------------------------------------*/
 /*
@@ -190,15 +204,56 @@ export function bulletIsBoom(bullet, distance) {
         callback:           为子弹爆裂效果
 */
 function showBullet(speed, bulletArr, callback) {
-    // 遍历数组将数组中的所有子弹前进当bullet.boom等于0的时候爆炸
+    // 遍历数组将数组中的所有子弹每遍历一个都会执行回调并传入当前子弹
     for (var i = 0; i < bulletArr.length; i++) {
-        if (bulletArr[i].DirectionY && bulletArr[i].DirectionX) {
-            bulletArr[i].style.left = bulletArr[i].offsetLeft + speed * bulletArr[i].DirectionX - borderWidth + "px";
-            bulletArr[i].style.top = bulletArr[i].offsetTop + speed * bulletArr[i].DirectionY - borderWidth + "px";
-        } else if (bulletArr[i].DirectionX) {
-            bulletArr[i].style.left = bulletArr[i].offsetLeft + speed * bulletArr[i].DirectionX - borderWidth + "px";
-        } else if (bulletArr[i].DirectionY) {
-            bulletArr[i].style.top = bulletArr[i].offsetTop + speed * bulletArr[i].DirectionY - borderWidth + "px";
+        // 判断当前子弹是什么类型
+        if (bulletArr[i].type == 0) {
+            if (bulletArr[i].DirectionY && bulletArr[i].DirectionX) {
+                bulletArr[i].style.left = bulletArr[i].offsetLeft + speed * bulletArr[i].DirectionX - borderWidth + "px";
+                bulletArr[i].style.top = bulletArr[i].offsetTop + speed * bulletArr[i].DirectionY - borderWidth + "px";
+            } else if (bulletArr[i].DirectionX) {
+                bulletArr[i].style.left = bulletArr[i].offsetLeft + speed * bulletArr[i].DirectionX - borderWidth + "px";
+            } else if (bulletArr[i].DirectionY) {
+                bulletArr[i].style.top = bulletArr[i].offsetTop + speed * bulletArr[i].DirectionY - borderWidth + "px";
+            }
+        } else if (bulletArr[i].type == 1) {
+            if (bulletArr[i].DirectionY && bulletArr[i].DirectionX) {
+                // flag为旋转弹起始旋转度数
+                let flag;
+                if (bulletArr[i].DirectionY == -1 && bulletArr[i].DirectionX == 1) {
+                    flag = 225;
+                } else if (bulletArr[i].DirectionY == 1 && bulletArr[i].DirectionX == 1) {
+                    flag = 135;
+                } else if (bulletArr[i].DirectionY == 1 && bulletArr[i].DirectionX == -1) {
+                    flag = 45;
+                } else if (bulletArr[i].DirectionY == -1 && bulletArr[i].DirectionX == -1) {
+                    flag = 315;
+                }
+                let increment = circleTrack(bulletArr[i], 50, flag);
+                bulletArr[i].style.left = bulletArr[i].offsetLeft + 1 * bulletArr[i].DirectionX + increment.xIncrement - borderWidth + "px";
+                bulletArr[i].style.top = bulletArr[i].offsetTop + 1 * bulletArr[i].DirectionY + increment.yIncrement - borderWidth + "px";
+            } else if (bulletArr[i].DirectionX) {
+                let flag;
+                if (bulletArr[i].DirectionX < 0) {
+                    flag = 0;
+                } else {
+                    flag = 180;
+                }
+                let increment = circleTrack(bulletArr[i], 50, flag);
+                bulletArr[i].style.left = bulletArr[i].offsetLeft + 1 * bulletArr[i].DirectionX + increment.xIncrement - borderWidth + "px"
+                bulletArr[i].style.top = bulletArr[i].offsetTop + increment.yIncrement - borderWidth + 'px';
+            } else if (bulletArr[i].DirectionY) {
+                let flag;
+                if (bulletArr[i].DirectionY < 0) {
+                    flag = 270;
+                } else {
+                    flag = 90;
+                }
+                let increment = circleTrack(bulletArr[i], 50, flag);
+                bulletArr[i].style.left = bulletArr[i].offsetLeft + increment.xIncrement - borderWidth + "px"
+                bulletArr[i].style.top = bulletArr[i].offsetTop + 1 * bulletArr[i].DirectionY + increment.yIncrement - borderWidth + "px";
+            }
+        } else if(bulletArr[i].type == 2){
         }
         callback && callback(bulletArr[i]);
         // 判断子弹是否抵达边界 第一颗子弹到达边界i为-1所以上面爆裂出问题
@@ -207,13 +262,44 @@ function showBullet(speed, bulletArr, callback) {
             bulletArr.splice(i, 1);
             i--;
         }
-
     }
 }
+
 /*--------------------------------------------------------*/
 export function cBulletMove(speed, callback) {
     showBullet(speed, bulletCArr, callback)
 }
+
+
 export function mBulletMove(speed, callback) {
     showBullet(speed, bulletMArr, callback)
+}
+
+// 参数x为传入的横坐标该圆圆心在坐标原点上返回的y为带有符号的增量
+function circleTrack(bullet, R, degStart) {
+    if (bullet.degree == undefined) {
+        bullet.degree = degStart;
+        bullet.oldX = 0;
+        bullet.oldY = 0;
+    }
+    if (bullet.degree <= degStart - 360 && degStart == 180) {
+        bullet.degree = degStart;
+    }
+    // 每次转多少度
+    bullet.degree -= 10;
+    // 相当于数学中的sin30
+    let sDeg = Math.sin(bullet.degree * Math.PI / 180);
+    let cDeg = Math.cos(bullet.degree * Math.PI / 180);
+    // 计算x和y
+    let newX = R * cDeg;
+    let newY = R * sDeg;
+    let xIncrement = newX - bullet.oldX;
+    let yIncrement = -(newY - bullet.oldY);
+    if (bullet.oldX == 0 && bullet.oldY == 0) {
+        xIncrement = 0;
+        yIncrement = 0;
+    }
+    bullet.oldX = newX;
+    bullet.oldY = newY;
+    return { xIncrement, yIncrement };
 }

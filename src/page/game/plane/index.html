@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../../../public/css/base.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="../../../../public/js/tools.js"></script>
     <script src="./js/public.js"></script>
@@ -30,12 +31,24 @@
         <div class="info">
             移动: W S A D
             <br><br>
+            换武器: q
+            <br><br>
             攻击: j
             <br><br>
             暂停: p
+            <br><br>
+            全屏轰炸: o
         </div>
     </div>
     <div class="countdown"></div>
+    <div class="leaderboard">
+        <p>排行榜</p>
+        <div class="close">x</div>
+        <div class="totalPage">共<span>0</span>页</div>
+        <div class="userName">ID : <span>2521151847</span></div>
+        <div class="userscore">分数 : <span>12</span></div>
+        <div class="pager"><button id="btnLeft">←</button><span> 1 </span><button id="btnRight">→</button></div>
+    </div>
     <div class="gameoverbg">
         <div class="gameover">
             <h2>游戏结束</h2>
@@ -53,6 +66,43 @@
         <div class='scorebox'>
             <div class='sc'>分数:</div>
             <div class='score'>0</div>
+        </div>
+        <div class="weaponbox">
+            <div class="curWeapon">当前武器</div>
+            <div class="curNum"><span>1</span>/<span>5</span></div>
+            <div class="weapon">普通公鸡</div>
+        </div>
+        <div class="skillsbox">
+            <div class="skills">技能</div>
+            <div class="cooling">冷却</div>
+            <div class="skill1">
+                地狱火
+                <div class="occlusionLbox">
+                    <div class="occlusionLeft">
+                        <div class="occlusionLeftL"></div>
+                    </div>
+                </div>
+                <div class="occlusionRbox">
+                    <div class="occlusionRight">
+                        <div class="occlusionRightR"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cooling1"><span>OK</span></div>
+            <div class="skill2">
+                全屏轰炸
+                <div class="occlusionLbox">
+                    <div class="occlusionLeft">
+                        <div class="occlusionLeftL"></div>
+                    </div>
+                </div>
+                <div class="occlusionRbox">
+                    <div class="occlusionRight">
+                        <div class="occlusionRightR"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cooling2"><span>OK</span></div>
         </div>
     </div>
 </body>

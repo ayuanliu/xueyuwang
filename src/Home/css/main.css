@@ -168,7 +168,12 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-
+        .gameList li .game2{
+            background-image: url('../image/Greedy\ Snake.png');
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
         .gameList li a .pfTd {
             height: 100px;
             text-align: center;

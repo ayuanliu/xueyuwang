@@ -107,7 +107,7 @@ function verifyFormat() {
         const p = new Promise((resolve, reject) => {
             // 注册
             sendAJAX('GET', '/users', undefined, function (result) {
-                let users = JSON.parse(result.data);
+                const users = result;
                 for (let i = 0; i < users.length; i++) {
                     if (uName === users[i].uName) {
                         console.log('账号已存在');

@@ -187,7 +187,7 @@ function login() {
         let pW = PassWord.value;
         // 获取到所有的用户并且处理数据
         sendAJAX('GET', '/users',undefined,function (result) {
-            let users = JSON.parse(result.data);
+            const users = result;
             for(let i = 0; i < users.length; i++){
                 if(uName === users[i].uName && pW === users[i].pW){
                     loadingBg.style.display = 'none';

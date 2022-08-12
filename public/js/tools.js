@@ -105,7 +105,7 @@ function sendAJAX(method,url,str,callback){
         if(this.readyState === 4){
             if(this.status >= 200 && this.status < 300){
                 result.data = this.response;
-                callback && callback(result);
+                callback && callback(JSON.parse(result.data),result);
             }else{
                 alert('出错了'+this.status);
             }

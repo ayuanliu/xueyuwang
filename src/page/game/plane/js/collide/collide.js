@@ -76,9 +76,68 @@ export function collide3(obj, arr, callback) {
         }
         // 判断在怪物碰撞到角色
         if (right2 - left1 < width && bottom2 - top1 < height) {
-            callback&&callback();
+            callback && callback();
             return true;
         }
     }
     return false;
 }
+
+// 地狱火与怪物
+export function collide4(arr1, arr2, callback) {
+    let result = [[], []];
+    for (let i = 0; i < arr1.length; i++) {
+        for (let j = 0; j < arr2.length; j++) {
+            // 判断是地狱火技能
+            if (arr1[i].isHellfire) {
+                let top1 = arr1[i].offsetTop;
+                let left1 = arr1[i].offsetLeft;
+                let right1 = left1 + arr1[i].offsetWidth;
+                let bottom1 = top1 + arr1[i].offsetHeight;
+
+                let top2 = arr2[j].offsetTop;
+                let left2 = arr2[j].offsetLeft;
+                let right2 = left2 + arr2[j].offsetWidth;
+                let bottom2 = top2 + arr2[j].offsetHeight;
+
+                let width = arr1[i].offsetWidth + arr2[j].offsetWidth;
+                let height = arr1[i].offsetHeight + arr2[j].offsetHeight
+                // 用来交换将大值给2小值给1
+                let temp = 0;
+                if (top1 > top2) {
+                    temp = top1;
+                    top1 = top2;
+                    top2 = temp;
+                } if (left1 > left2) {
+                    temp = left1;
+                    left1 = left2;
+                    left2 = temp;
+                } if (right1 > right2) {
+                    temp = right1;
+                    right1 = right2;
+                    right2 = temp;
+                } if (bottom1 > bottom2) {
+                    temp = bottom1;
+                    bottom1 = bottom2;
+                    bottom2 = temp;
+                }
+                // 判断在怪物碰撞到地狱火
+                if (right2 - left1 < width && bottom2 - top1 < height) {
+                    // 碰撞
+                    result[0].push(i);
+                    result[1].push(j);
+                }
+            }
+        }
+    }
+    callback && callback(result);
+}
+// 障碍物与怪物
+export function collide5(arr1, arr2, callback) {
+
+}
+
+// // 障碍物与子弹
+// export function collide6(arr1,arr2,callback){
+
+// }

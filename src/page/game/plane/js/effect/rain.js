@@ -37,7 +37,7 @@ export function createRain() {
             document.body.appendChild(rain);
             rainArr[rainArr.num++] = rain;
         }
-    }, 100);
+    }, 200);
 }
 
 // 雨滴移动

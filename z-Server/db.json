@@ -9,15 +9,23 @@
   "plane": [
     {
       "id": 1,
-      "score": "0"
+      "score": "24"
     },
     {
       "id": 2,
-      "score": "0"
+      "score": "19"
     },
     {
       "id": 3,
-      "score": "0"
+      "score": "18"
+    },
+    {
+      "id": 4,
+      "score": "86"
+    },
+    {
+      "id": 5,
+      "score": "117"
     }
   ],
   "profile": {
