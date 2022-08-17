@@ -31,3 +31,10 @@ export function initObstruction() {
         }
     }
 }
+
+export function clearObstruction(){
+    for (let i = 0; i < obstructArr.length; i++) {
+        document.body.removeChild(obstructArr[i]);
+    }
+    obstructArr.length = 0;
+}

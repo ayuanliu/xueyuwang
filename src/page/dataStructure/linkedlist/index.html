@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/main.css">
     <script src="../../../../public/js/tools.js"></script>
     <script src="../../../../public/js/baseMain.js"></script>
-    <script src="./js/queue.js"></script>
+    <script src="./js/linkedlist.js"></script>
     <script src="./js/main.js"></script>
 </head>
 
@@ -22,15 +22,16 @@
                 数据结构
             </div>
             <div class="home">
-                <a href="../../../Home/index.html">
+                <a href="../HTML/main.html">
                     <img src="../../../../public/image/home.png" alt="">
                 </a>
             </div>
             <div id="user" class="user">
-                <div id="userImg" class="userImg"><img src="../img/用户头像图/yuanliu.jpg" alt=""></div>
+                <div id="userImg" class="userImg"><!--<img src="../img/用户头像图/yuanliu.jpg" alt="">--></div>
             </div>
         </div>
     </div>
+
 
     <div class="main sharing-width">
         <div class="lf-nav">
@@ -42,9 +43,9 @@
             <div><a id="upbtn" class="upbtn" href="javascript:;">点击上滑</a></div>
             <div id="middle" class="middle">
                 <div id="mcontent" class="mcontent">
-                    <a href="" class="lf-a-select">栈</a>
+                    <a href="../stack/index.html">栈</a>
                     <a href="../tree/index.html">树</a>
-                    <a href="../linkedlist/index.html">链表</a>
+                    <a href="#" class="lf-a-select">链表</a>
                 </div>
             </div>
             <div><a id="downbtn" class="downbtn" href="javascript:;">点击下滑</a></div>
@@ -55,34 +56,23 @@
             </div>
         </div>
         <div class="buttonbox">
-            <button id="btnPush" class="btn">PUSH</button>
-            <button id="btnPop" class="btn">POP</button>
+            <button class="btn">插入节点</button>
+            <button class="btn">删除节点</button>
         </div>
         <div id="showbox" class="showbox">
-            <div id="text" class="text">
-                <div id="prompt" class="promat">&gt提示&lt</div>
-                <div id="content" class="content">栈为空</div>
-                <div id="valueSP" class="valueSP">SP: <span></span></div>
-                <div class="line1"></div>
-                <div class="line2"></div>
-            </div>
-
-            <div id="queue" class="queue">
-                <ul id="qMemory" class="qMemory">
-                </ul>
-            </div>
-            <div id="stack" class="stack">
-                <ul id="memory" class="memory">
-                </ul>
-                <div class="nul">NULL</div>
-            </div>
-            <div id="arrowhead" class="arrowhead">
-                <img src="./image/arrow.png" alt="">
+            <div class="mainbox">
+                <div class="point-input">
+                    <div class="input">双击输入</div>
+                    <input type="text" class="position">
+                    <div class="next">next</div>
+                </div>
+                <div class="point-delete">
+                    <div class="input">双击输入</div>
+                </div>
             </div>
         </div>
-
     </div>
-
+    
     <div class="footer">
         <div class="explain sharing-width">
             栈属于线性存储结构，

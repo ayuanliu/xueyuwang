@@ -1,0 +1,94 @@
+.mainbox {
+    height: 720px;
+    position: relative;
+    overflow: auto;
+}
+.point-input {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid rgb(215, 142, 142);
+}
+
+.point-input .position {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    border: 0;
+    top: -3px;
+    left: -53px;
+    text-align: center;
+    border: 3px solid rgb(215, 142, 142);
+    border-right: 0;
+    background-color: rgb(110, 126, 138);
+}
+
+.input {
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    border: 0;
+    font-size: 18px;
+    text-align: center;
+    background-color: rgb(146, 150, 154);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.point-delete{
+    position: absolute;
+    top: 250px;
+    right: 10px;
+    line-height: 50px;
+    width: 100px;
+    height: 50px;
+    border: 3px solid rgb(215, 142, 142);
+}
+
+.point {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    width: 100px;
+    height: 0px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.data {
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgb(146, 150, 154);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.next {
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgb(207, 213, 218);
+}
+
+.lineB {
+    position: absolute;
+    width: 2px;
+    background-color: rgb(158, 158, 170);
+    z-index: 9;
+    transform-origin: 50% 0;
+}
+
+.lineR {
+    position: absolute;
+    width: 2px;
+    background-color: rgb(105, 95, 95);
+    z-index: 9;
+    transform-origin: 50% 0;
+}

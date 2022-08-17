@@ -45,6 +45,24 @@ function createDom() {
     // bind(myHtml,"DOMMouseScroll",myHtml.onwheel);
 
     btnHtmlExplain.onclick = function () {
+        // 如果html为空则初始化
+        if(myHtml.value==''){
+            myHtml.value =
+`<html>
+    <head>
+        <title></title>
+    </head>
+<body>
+    <div>
+        <p></p>
+    </div>
+    <div>
+        <i></i>
+    </div>
+    <div></div>
+</body>
+</html>`
+        }
         // 在这进行解析
         var content = myHtml.value;
         var arr = new Array();
@@ -93,14 +111,13 @@ function createDom() {
         }
         // 计算每个盒子的大小
         var space = htmlExplain.offsetWidth / layerSpace[layerSpace.length - 1];
-        // 给每个盒子添加序号
+        // 给每个盒子添加当前层的序号
         head.setOrder();
 
         // 在页面中显示DOM树
         /**************************************************************/
         // 该参数为当前遍历到的对象
         head.readTree(function (obj) {
-            // objPause[0] = 1;
             // 将遍历到的节点添加进页面
             htmlExplain.appendChild(obj.nodeValue);
             // 计算盒子的宽度
@@ -152,8 +169,6 @@ function createDom() {
                 }
             }
         }, 500);
-
-
     }
 
 }

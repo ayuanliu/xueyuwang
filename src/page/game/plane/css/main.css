@@ -343,7 +343,7 @@
         }
 
         .occlusionLeftL {
-            float: left;
+            float: right;
             width: 50%;
             height: 100%;
             background-color: rgba(0, 0, 0, .3);
@@ -367,7 +367,7 @@
         }
 
         .occlusionRightR {
-            float: right;
+            float: left;
             width: 50%;
             height: 100%;
             background-color: rgba(0, 0, 0, .3);

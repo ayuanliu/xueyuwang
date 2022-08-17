@@ -17,7 +17,7 @@
     border-radius: 32px;
     resize: none;
     outline: none;
-    background-color: rgba(123, 136, 142, 0.5);
+    background-color: rgba(175, 186, 197, 0.5);
     overflow: hidden;
 }
 
@@ -29,7 +29,7 @@
     right: 0;
     border-radius: 32px;
     box-shadow: 2px 2px 5px rgb(125, 115, 115);
-    background-color: rgba(123, 123, 143, 0.5);
+    background-color: rgba(172, 172, 190, 0.5);
 }
 .htmlExplain div{
     position: absolute;

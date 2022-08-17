@@ -36,7 +36,7 @@ import { clearCBullet, clearMBullet } from './bullet/bullet.js'
 import { cBulletMove, mBulletMove } from './bullet/bullet.js'
 import { createMonster, monsterShoot, monsterMove, getMonsterArr, clearMonster, clearCreateMonsterTimer } from './monster/monster.js'
 import { addScore, outInShowData, sendScore, setScore, updataCurWeapon } from './showData/showData.js'
-import { initObstruction, mapArr, obstructArr } from './obstruction/obstruction.js'
+import { clearObstruction, initObstruction, mapArr, obstructArr } from './obstruction/obstruction.js'
 import { findRoute } from './findRoute/findRoute.js'
 import { fullScreenBombing, hellfire, skills } from './skill/skill.js'
 /*----------------------------------------------------------------------------------------------------------------*/
@@ -216,6 +216,8 @@ export function gameLoad() {
                 outInShowData();
                 // 分数置零
                 setScore();
+                // 清空障碍物
+                clearObstruction();
                 let startMenu = document.querySelector('.startMenu');
                 gameoverbg.style.display = "none";
                 startMenu.style.display = "block";
