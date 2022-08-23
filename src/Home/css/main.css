@@ -126,9 +126,9 @@
 
         .mainsection {
             width: 752px;
-            background: rgba(205, 199, 199, 0.1);
+            background: rgba(93, 78, 78, 0.1);
             text-align: center;
-            border-top: 2px solid red;
+            border-top: 2px solid rgb(143, 93, 93);
         }
 
         .mainsection span {
@@ -143,6 +143,7 @@
             background-color: rgb(123, 125, 127);
             margin: 0 auto;
             overflow: hidden;
+            border: 5px solid rgb(179, 153, 153);
         }
 
         .gameList {
@@ -238,45 +239,83 @@
             }
         }
 
-
         .page {
-            width: 740px;
-            height: 800px;
+            position: relative;
+            width: 700px;
+            margin: auto;
             background-color: rgba(118, 118, 118, .5);
-            transition: 2s;
             border: 6px dotted rgb(152, 113, 113);
+            perspective: 2000px;
         }
 
         .page .iconfont {
             font-size: 20px;
             border-bottom: 4px double rgba(126, 124, 124, .8);
         }
-
-        .page a {
-            float: left;
-            display: block;
+        .study{
+            position: relative;
+            width: 700px;
+            height: 570px;
+            margin: auto;
+            transform-style: preserve-3d;
+        }
+        .study a {
+            position: absolute;
+            left: 0;
+            right: 0;           
             width: 140px;
-            height: 500px;
-            margin: 100px auto;
-            margin-right: 10px;
-            transition: 1s linear;
-            transform: rotateY(-60deg);
+            height: 400px;
+            margin: auto;
+            margin-top: 80px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+            background-color: rgb(154, 152, 152);
         }
-
-        .page a:first-of-type {
-            margin-right: 0;
+        .study a:nth-child(1){
+            transform:  translateZ(180px);
         }
-
-        .page .text {
+        .study a:nth-child(2){
+            transform:  rotateY(60deg) translateZ(180px);
+        }
+        .study a:nth-child(3){
+            transform:  rotateY(120deg) translateZ(180px);
+        }
+        .study a:nth-child(4){
+            transform:  rotateY(180deg) translateZ(180px);
+        }
+        .study a:nth-child(5){
+            transform:  rotateY(-120deg) translateZ(180px);
+        }
+        .study a:nth-child(6){
+            transform:  rotateY(-60deg) translateZ(180px);
+        }
+        .study .text {
             width: 70px;
-            font-size: 50px;
+            font-size: 40px;
             text-align: center;
             color: black;
             margin: 0 auto;
         }
-
-        .page:hover a {
-            transform: rotateY(0);
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-            background-image: linear-gradient(rgba(141, 149, 139, 0.5), rgba(174, 206, 168, 0.2));
+        .page .buttonL,.page .buttonR{
+            position: absolute;
+            top: 280px;
+            left: 10px;
+            width: 50px;
+            height: 80px;
+            line-height: 80px;
+            font-size: 50px;
+            background-color: rgba(146, 140, 140, 0.5);
+            outline: 1px solid black;
+            cursor: pointer;
+        }
+        .page .buttonR{
+            left: auto;
+            right: 10px;
+        }
+        .page .enter{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            background-color: rgba(72, 184, 167,.5);
+            margin: 0 auto;
+            margin-bottom: 10px;
         }

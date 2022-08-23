@@ -1,3 +1,5 @@
+import { createRoot, Node } from "./database.js";
+
 window.onload = function () {
     // document.body.style.zoom = 0.8;
     verifyFormat();
@@ -108,19 +110,26 @@ function verifyFormat() {
             // 注册
             sendAJAX('GET', '/users', undefined, function (result) {
                 const users = result;
+                console.log(users);
+                // 获取后台的所有账号
+                let root = createRoot();
                 for (let i = 0; i < users.length; i++) {
-                    if (uName === users[i].uName) {
-                        console.log('账号已存在');
-                        return;
-                    }
+                    root.insertTree(users[i].uName);
                 }
-                resolve();
+                // 判断注册的账号是否存在树中
+                if(Node.isInTree(uName)){
+                    console.log('账号已存在');
+                }else{
+                    root=null;
+                    resolve();
+                } 
             })
         });
         p.then((value) => {
             // 发送POST请求
             sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}`, function () {
                 console.log('注册成功');
+                location.replace('http://127.0.0.1:5500/src/home/index.html');
             })
         })
     }
