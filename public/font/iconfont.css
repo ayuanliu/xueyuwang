@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3301032 */
-  src: url('iconfont.woff2?t=1657031056569') format('woff2'),
-       url('iconfont.woff?t=1657031056569') format('woff'),
-       url('iconfont.ttf?t=1657031056569') format('truetype');
+  src: url('iconfont.woff2?t=1661587094462') format('woff2'),
+       url('iconfont.woff?t=1661587094462') format('woff'),
+       url('iconfont.ttf?t=1661587094462') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gengduo-shuxiang:before {
+  content: "\e8c4";
+}
+
+.icon-24gf-ellipsis:before {
+  content: "\eb10";
+}
+
+.icon-tianjia:before {
+  content: "\e63f";
 }
 
 .icon-linecar105:before {

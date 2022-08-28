@@ -38,6 +38,26 @@
       "score": "117"
     }
   ],
+  "website": [
+    {
+      "id": 1,
+      "name": "B站",
+      "url": "http://bilibili.com",
+      "img": "./image/baidu.png"
+    },
+    {
+      "id": 2,
+      "name": "百度",
+      "url": "http://baidu.com",
+      "img": "./image/baidu.png"
+    },
+    {
+      "id": 3,
+      "name": "github",
+      "url": "http://github.com",
+      "img": "./image/github.png"
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

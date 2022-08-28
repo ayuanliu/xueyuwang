@@ -116,16 +116,113 @@
             text-align: center;
             font-size: 25px;
         }
-
+        .website{
+            margin-top: 20px;
+        }
+        .website .container{
+            position: relative;
+            width: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .website a{
+            position: relative;
+            float: left;
+            width: 25%;
+            height: 75px;
+            padding-top: 5px;
+        }
+        .website a .moreoperator{
+            position: absolute;
+            top: 5px;
+            right: 35px;
+            border-radius: 50%;
+            display: none;
+        }
+        a:hover .moreoperator{
+            display: block;
+        }
+        .moreoperator:hover{
+            background-color: rgb(188, 188, 191);
+        }
+        .morebox{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 130px;
+            height: 60px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 10px;
+            text-align: left;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0,.1);
+            color: black;
+            background-color: #fff;
+            display: none;
+        }
+        .morebox div{
+            height: 30px;
+            line-height: 30px;
+            padding: 0 28px;
+        }
+        .morebox div:hover{
+            background-color: rgb(0, 0, 0,.1);
+        }
+        .website .rectangle{
+            width: 80px;
+            height: 75px;
+            padding-top: 5px;
+            margin: 0 auto;
+        }
+        .website a:hover .rectangle{
+            background-color: rgba(87, 89, 90, 0.1);
+        }     
+        .website .circle{
+            width: 50px;
+            height: 45px;
+            font-size: 30px;
+            color: rgb(120, 120, 120);
+            padding-top: 5px;
+            line-height: 45px;
+            border-radius: 25px;
+            margin: 0 auto;
+            background-color: rgba(87, 89, 90, 0.1);
+        }
+        .website a:hover .circle{
+            background-color: rgb(229,229,229);
+        }
+        .website .text{
+            margin-top: 3px;
+            font-size: 13px;
+            color: black;
+            overflow: hidden;
+            text-overflow:ellipsis; 
+        }
+        .addwebsite, .morewebsite{
+            float: left;
+            width: 25%;
+            height: 75px;
+            padding-top: 5px;
+            cursor: pointer;
+        }
+        .addwebsite:hover .rectangle, .morewebsite:hover .rectangle{
+            background-color: rgba(87, 89, 90, 0.1);
+        }
+        .addwebsite:hover .circle, .morewebsite:hover .circle{
+            background-color: rgb(229,229,229);
+        }
         .aside {
             width: 100px;
             height: 500px;
             background-color: red;
-            float: right;
+            float: left;
         }
 
         .mainsection {
             width: 752px;
+            margin-left: auto;
+            margin-right: 0;
             background: rgba(93, 78, 78, 0.1);
             text-align: center;
             border-top: 2px solid rgb(143, 93, 93);

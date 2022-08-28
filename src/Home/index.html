@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="../../public/css/base.css">
     <link rel="stylesheet" href="../../public/font/iconfont.css">
     <link rel="stylesheet" href="../../public/css/baseMain.css">
+    <link rel="stylesheet" href="../../public/css/maskLayer.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="../../public/js/tools.js"></script>
     <script src="../../public/js/baseMain.js"></script>
-    <script src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </head>
 
 <body>
+
     <div class="loadingBg" id="loadingBg">
         <div class="loadingBox">
             <form action="#">
@@ -32,7 +34,18 @@
             <div class="loadingClose" id="loadingClose">X</div>
         </div>
     </div>
-
+    <div class="masklayerbox">
+        <div class="masklayerbox-bg">
+            <div class="masklayerbox-container">
+                <form action="">
+                    <div class="masklayerbox-title"></div>
+                    <div class="masklayerbox-info">快捷方式已存在</div>
+                    <div class="masklayerbox-content"></div>
+                </form>
+                <div class="masklayerbox-close">X</div>
+            </div>
+        </div>
+    </div>
     <div class="header sharing-width">
         <div class="h-nav sharing-width clearfix">
             <div class="currentPage">
@@ -66,7 +79,12 @@
             <p>
                 该网站主要用于将自己学习到的东西进行练习<br />
             </p>
+            <div class="website">
+                <div class="container clearfix">
+                </div>
+            </div>
         </div>
+
 
         <div id="aside" class="aside">
 
@@ -132,6 +150,7 @@
             </div>
         </div>
     </div>
+
 
 
 

@@ -1,3 +1,4 @@
+import { } from "./showWebsite.js";
 window.onload = function () {
     // document.body.style.zoom = 0.8;
 
@@ -139,6 +140,7 @@ function studySwiper() {
         let reg = /[-\d]/g;
         let current = obj.style[attr];
         let result = [];
+        let temp = null;
         // 对current进行正则提取出数字
         while (temp = reg.exec(current)) {
             temp = temp[0];
