@@ -121,6 +121,12 @@ function upbtnAdownbtn() {
 //     }
 // }
 
+// homeInit
+function homeInit(){
+    if(localStorage.getItem('token')){
+        // reqhomeInit
+    }
+}
 
 function user() {
     let user = document.getElementById('user');
@@ -178,23 +184,47 @@ function admine() {
 }
 
 function login() {
-    let loadIn = document.getElementById('loadIn');
-    let UserName = document.getElementById('UserName');
-    let PassWord = document.getElementById('PassWord');
-    let loadingBg = document.getElementById('loadingBg');
-    loadIn.onclick = function () {
+    const loadIn = document.getElementById('loadIn');
+    const UserName = document.getElementById('UserName');
+    const PassWord = document.getElementById('PassWord');
+    const user = document.querySelector('.user');
+    const loadingBg = document.getElementById('loadingBg');
+    const userImg = document.querySelector('.userImg');
+    loadIn.onclick = function (event) {
         let uName = UserName.value;
         let pW = PassWord.value;
         // 获取到所有的用户并且处理数据
-        sendAJAX('GET', '/users',undefined,function (result) {
+        sendAJAX('GET', '/users', undefined, function (result) {
             const users = result;
-            for(let i = 0; i < users.length; i++){
-                if(uName === users[i].uName && pW === users[i].pW){
+            for (let i = 0; i < users.length; i++) {
+                if (uName === users[i].uName && pW === users[i].pW) {
                     loadingBg.style.display = 'none';
+                    userImg.children[0].src = users[i].avatar;
+                    user.removeChild(user.children[0]);
+                    user.removeChild(user.children[1]);
+                    user.onmouseenter = null;
+                    user.onmouseleave = null;
+                    userImg.onclick = function(){
+                        const userInfobox = document.querySelector('.userInfobox');
+                        const avatarbox = userInfobox.children[0].children[0].children[0];
+                        avatarbox.children[0].src=users[i].avatar;
+                        userInfobox.style.display = 'block';
+                    }
+                    localStorage.setItem('token', users[i].token);
+                    event.preventDefault();
                     return;
                 }
             }
             console.log('账号或密码错误');
         });
+        event.preventDefault();
+    }
+}
+
+function userInfo(){
+    const userInfobox = document.querySelector('.userInfobox');
+    const close = userInfobox.children[0].children[0].children[3];
+    close.onclick=function(){
+        userInfobox.style.display='none';
     }
 }

@@ -11,13 +11,13 @@ function getStyle(obj, name) {
 }
 
 // 设计动画原理就是每个多少毫秒加x
-    /* 
-        obj: 要改变样式的元素
-        attr: 要改变的样式
-        target: 改变的最终结果
-        speed: 改变的速度
-        callback: 回调函数
-    */
+/* 
+    obj: 要改变样式的元素
+    attr: 要改变的样式
+    target: 改变的最终结果
+    speed: 改变的速度
+    callback: 回调函数
+*/
 function move(obj, attr, target, speed, callback) {
     // 先停止当前的动画
 
@@ -62,19 +62,19 @@ function bind(obj, eventStr, callback) {
         start 开始分割的符号
         end 结束分割的符号
 */
-function mySplit(data,start,end){
+function mySplit(data, start, end) {
     var flag = 0;
     var tempArr = new Array();
     var tempIndex = 0;
-    for(let i = 0; i < data.length; i++){
-        if(data[i] == end && flag == 1){
+    for (let i = 0; i < data.length; i++) {
+        if (data[i] == end && flag == 1) {
             flag = 0
             tempIndex++;
         }
-        if(flag){
+        if (flag) {
             tempArr[tempIndex] += data[i];
-        } 
-        if(data[i] == start){
+        }
+        if (data[i] == start) {
             flag = 1;
             tempArr[tempIndex] = '';
         }
@@ -91,23 +91,24 @@ function mySplit(data,start,end){
         str:            请求体
         callback:       请求成功回调会将获取的数据传入
 */
-function sendAJAX(method,url,str,callback){
+function sendAJAX(method, url, str, callback) {
     const xhr = new XMLHttpRequest();
     const result = {};
     const baseURL = 'http://127.0.0.1:3000';
     // 请求行
-    xhr.open(method,baseURL+url);
+    xhr.open(method, baseURL + url);
     // 要设置请求头json-server才能有用否则post请求数据无法传上去
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    // 设置请求体编码格式
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     // 请求体
     xhr.send(str);
-    xhr.onreadystatechange = function(){
-        if(this.readyState === 4){
-            if(this.status >= 200 && this.status < 300){
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            if (this.status >= 200 && this.status < 300) {
                 result.data = this.response;
-                callback && callback(JSON.parse(result.data),result);
-            }else{
-                alert('出错了'+this.status);
+                callback && callback(JSON.parse(result.data), result);
+            } else {
+                alert('出错了' + this.status);
             }
         }
     }

@@ -127,7 +127,7 @@ function verifyFormat() {
         });
         p.then((value) => {
             // 发送POST请求
-            sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}`, function () {
+            sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}&token=${'t'+uName}`, function () {
                 console.log('注册成功');
                 location.replace('http://127.0.0.1:5500/src/home/index.html');
             })

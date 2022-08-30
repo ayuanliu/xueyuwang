@@ -95,7 +95,7 @@
             background-color: rgb(245,43,0);
             cursor: pointer;
         }
-
+        
         .main {
             transform-style: preserve-3d;
             perspective: 500px;

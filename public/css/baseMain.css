@@ -1,13 +1,15 @@
 /* 头部导航栏 */
-.header{
+.header {
     height: 100px;
     user-select: none;
 }
-.header .h-nav{
+
+.header .h-nav {
     position: relative;
     background-color: rgba(15, 15, 15, 0.6);
 }
-.header .currentPage{
+
+.header .currentPage {
     width: 200px;
     height: 76px;
     font-size: 50px;
@@ -20,44 +22,51 @@
     color: rgb(236, 235, 235);
     text-align: center;
 }
-.header .home{
-    float: left; 
+
+.header .home {
+    float: left;
     margin-left: 210px;
 }
-.header .home a{
+
+.header .home a {
     display: block;
     padding: 15px 0;
     height: 50px;
     text-align: center;
 }
-.header .home img{
+
+.header .home img {
     height: 70px;
 }
-.header .user{
+
+.header .user {
     position: relative;
     float: right;
     width: 100px;
     height: 100px;
-    background-color: rgb(121,121,121);
+    background-color: rgb(121, 121, 121);
 }
-.icon-linecar105{
+
+.icon-linecar105 {
     position: absolute;
     font-size: 20px;
     top: 40px;
     left: -1px;
     z-index: 999;
 }
-.header .userImgBg{
+
+.header .userImgBg {
     position: absolute;
     width: 65px;
     height: 65px;
     top: 0;
     right: 0;
     left: auto;
-    background-color: rgb(121,121,121);
+    background-color: rgb(121, 121, 121);
     z-index: 99;
 }
-.header .userImg{
+
+.header .userImg {
     position: absolute;
     width: 65px;
     height: 65px;
@@ -65,27 +74,32 @@
     right: 16px;
     left: auto;
     border-radius: 50px;
-    background-color: rgb(121,121,121);
+    background-color: rgb(121, 121, 121);
     overflow: hidden;
     outline: medium solid rgb(0, 0, 0);
     z-index: 99;
 }
-.header .userImg:hover{
+
+.header .userImg:hover {
     cursor: pointer;
     outline: medium solid rgba(255, 255, 255, 0.5);
 }
-.header .userImg img{
-    width: 100%;  
+
+.header .userImg img {
+    width: 100%;
 }
-.header .register{
+
+.header .register {
     position: absolute;
     width: 100px;
     line-height: 100px;
     font-size: 20px;
     text-indent: 20px;
+    cursor: pointer;
     display: none;
 }
-.header .userName{
+
+.header .userName {
     float: left;
     width: 100px;
     text-align: center;
@@ -95,17 +109,167 @@
 }
 
 
+.userInfobox {
+    display: none;
+    font-size: 20px;
+}
+
+.userInfobox-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 999;
+}
+
+.userInfobox-container {
+    position: absolute;
+    width: 1100px;
+    height: 600px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 5px solid rgb(101, 100, 100);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.userInfobox-container .close {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px 0 0 0;
+    background-color: rgb(125, 125, 123);
+    cursor: pointer;
+}
+
+.userInfobox-container .avaitarbox {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 17px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50px;
+    background-color: rgb(121, 121, 121);
+    overflow: hidden;
+    outline: medium solid rgb(0, 0, 0);
+}
+.userInfobox-container .avaitarbox img{
+    width: 100%;
+}
+.userInfobox-container .sectionPage {
+    line-height: 50px;
+    border-top: 5px solid rgb(174, 169, 169);
+    border-bottom: 5px solid rgb(174, 169, 169);
+    background-color: rgb(178, 176, 176);
+    text-align: center;
+}
+
+.userInfobox-container .leftsection {
+    float: left;
+    width: 49.5%;
+    height: 100%;
+    background-color: rgb(224, 220, 227);
+    border-right: 5px solid rgb(107, 96, 96);
+}
+
+.userInfobox-container .leftsection .header {
+    height: 134px;
+    /* border-bottom: 5px solid rgb(174, 169, 169); */
+}
+
+.userInfobox-container .leftsection .mainer {
+    width: 100%;
+    height: 400px;
+}
+
+.userInfobox-container .leftsection .mainer li {
+    height: 30px;
+    line-height: 30px;
+    padding: 20px;
+    border-left: 10px solid rgb(123, 142, 248);
+    border-right: 10px solid rgb(123, 142, 248);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.userInfobox-container .leftsection .mainer .item {
+    float: left;
+    width: 80px;
+    text-align: right;
+}
+
+.userInfobox-container .leftsection .mainer li:nth-child(2n+1) {
+    background-color: rgb(255, 255, 255);
+}
+
+.userInfobox-container .leftsection .mainer li:nth-child(2n) {
+    background-color: rgb(211, 211, 209);
+}
+
+.userInfobox-container .rightsection {
+    float: right;
+    width: 49.5%;
+    height: 100%;
+    background-color: rgb(202, 206, 212);
+    border-left: 5px solid rgb(107, 96, 96);
+}
+
+.userInfobox-container .rightsection .header {
+    height: 134px;
+    /* border-bottom: 5px solid rgb(174, 169, 169); */
+}
+
+.userInfobox-container .rightsection .mainer {
+    width: 100%;
+    height: 400px;
+}
+
+.userInfobox-container .rightsection .mainer li {
+    height: 30px;
+    line-height: 30px;
+    padding: 20px;
+    border-left: 10px solid rgb(123, 142, 248);
+    border-right: 10px solid rgb(123, 142, 248);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.userInfobox-container .rightsection .mainer .item {
+    float: left;
+    width: 80px;
+    text-align: right;
+}
+
+.userInfobox-container .rightsection .mainer li:nth-child(2n+1) {
+    background-color: rgb(211, 211, 209);
+}
+
+.userInfobox-container .rightsection .mainer li:nth-child(2n) {
+    background-color: rgb(255, 255, 255);
+}
 
 /* 展示区域 */
-.main{
+.main {
     margin-top: 10px;
-    background-color: rgba(97, 91, 92,.5);
+    background-color: rgba(97, 91, 92, .5);
     /* background-image: url("../img/展示区图/main_bgc.png"); */
     background-repeat: no-repeat;
     background-size: cover;
     user-select: none;
 }
-.main .lf-nav{
+
+.main .lf-nav {
     position: relative;
     float: left;
     width: 160px;
@@ -113,7 +277,8 @@
     background-color: rgba(0, 0, 0, 0.4);
     /* border-left: 5px solid red; */
 }
-.main .lf-nav .downline{
+
+.main .lf-nav .downline {
     position: absolute;
     height: 25px;
     width: 128px;
@@ -122,19 +287,22 @@
     right: 0;
     margin: 0 auto;
 }
-.main .lf-nav .line{
+
+.main .lf-nav .line {
     width: 120px;
-    border:5px solid rgba(0, 0, 0, 0.4);
+    border: 5px solid rgba(0, 0, 0, 0.4);
     margin: 0 auto;
     margin-bottom: 3px;
     box-shadow: 1px 0 2px black;
     border-radius: 4px;
 }
-.main .lf-nav .upline .line3{
+
+.main .lf-nav .upline .line3 {
     margin-bottom: 1px;
 }
+
 .main .lf-nav .upbtn,
-.main .lf-nav .downbtn{
+.main .lf-nav .downbtn {
     width: 160px;
     height: 48px;
     line-height: 48px;
@@ -146,64 +314,68 @@
     box-shadow: 5px 0 5px black;
     border-radius: 10px;
 }
-.main .lf-nav .downbtn{
+
+.main .lf-nav .downbtn {
     position: absolute;
     top: 634px;
     border: none;
 }
-.main .lf-nav .middle{
+
+.main .lf-nav .middle {
     position: relative;
     width: 160px;
     height: 700px;
     overflow: hidden;
 }
-.main .mcontent{
+
+.main .mcontent {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
 }
-.main .lf-nav a{
+
+.main .lf-nav a {
     display: block;
     width: 152px;
     margin: 0 auto;
     line-height: 98px;
     font-size: 50px;
-    color: rgb(255, 255, 255,.7);
+    color: rgb(255, 255, 255, .7);
     text-align: center;
-    border-bottom: 2px solid rgba(0, 0, 0,.2);
+    border-bottom: 2px solid rgba(0, 0, 0, .2);
 }
-.main .lf-nav .lf-a-select{
+
+.main .lf-nav .lf-a-select {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
-    border-bottom: 2px solid rgba(0, 0, 0,.8);
+    border-bottom: 2px solid rgba(0, 0, 0, .8);
 }
-/* .main .lf-nav .middle a:first-child{
+
+.main .lf-nav a:hover {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.4);
-    border-bottom: 2px solid rgba(0, 0, 0,.8);
-} */
-.main .lf-nav a:hover{
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-bottom: 2px solid rgba(0, 0, 0,.8);
+    border-bottom: 2px solid rgba(0, 0, 0, .8);
 }
-.main .showbox{
+
+.main .showbox {
     position: relative;
     width: 80%;
     height: 716px;
     margin-left: 160px;
     background-color: rgba(0, 0, 0, 0.3);
-    border: 2px solid black;    
+    border: 2px solid black;
 }
-.main .buttonbox{
+
+.main .buttonbox {
     float: right;
     width: 140px;
     height: 720px;
     background-color: rgba(0, 0, 0, 0.4);
 }
-.main .btn{
+
+.main .btn {
     display: block;
     width: 120px;
     height: 80px;
@@ -216,18 +388,20 @@
     box-shadow: 2px 2px 5px rgb(0, 0, 0);
     border-radius: 32px;
 }
-.main .btn:hover{
+
+.main .btn:hover {
     color: #fff;
     box-shadow: none;
 }
 
 
 /* 底部文字解析部分 */
-.footer{
+.footer {
     margin-top: 20px;
 }
-.footer .explain{
+
+.footer .explain {
     height: 100px;
     font-size: 30px;
-    background-color: rgba(0, 0, 0,.4);
+    background-color: rgba(0, 0, 0, .4);
 }

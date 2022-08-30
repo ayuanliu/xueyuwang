@@ -1,12 +1,16 @@
 import { } from "./showWebsite.js";
 window.onload = function () {
     // document.body.style.zoom = 0.8;
+    // 页面加载完成立刻查看本地是否有token有则带着token去请求用户头像
+
+    homeInit();
 
     user();
     registerBtn()
     userBtn();
     admine();
     login();
+    userInfo();
 
     // 轮播图
     swiper();
