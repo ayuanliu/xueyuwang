@@ -51,7 +51,7 @@ window.onload = function () {
             // 总页数
             totalPage.innerHTML = data.length;
             // 当前页
-            userName.innerHTML = data[0].id;
+            userName.innerHTML = data[0].uName || '暂无';
             userScore.innerHTML = data[0].score;
             span.innerHTML = 1;
             // 返回
@@ -64,7 +64,7 @@ window.onload = function () {
                 let curPage = parseInt(span.innerHTML);
                 if(curPage > 1){
                     curPage--;
-                    userName.innerHTML = data[curPage-1].id;
+                    userName.innerHTML = data[curPage-1].uName||'暂无';
                     userScore.innerHTML = data[curPage-1].score;
                     span.innerHTML = curPage;
                 }
@@ -74,7 +74,7 @@ window.onload = function () {
                 let curPage = parseInt(span.innerHTML);
                 if(curPage < data.length){
                     curPage++;
-                    userName.innerHTML = data[curPage-1].id;
+                    userName.innerHTML = data[curPage-1].uName||'暂无';
                     userScore.innerHTML = data[curPage-1].score;
                     span.innerHTML = curPage;
                 }

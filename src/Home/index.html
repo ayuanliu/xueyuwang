@@ -8,31 +8,29 @@
     <title>自学网</title>
     <link rel="stylesheet" href="../../public/css/base.css">
     <link rel="stylesheet" href="../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../public/css/baseMain.css">
     <link rel="stylesheet" href="../../public/css/maskLayer.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="../../public/js/tools.js"></script>
-    <script src="../../public/js/baseMain.js"></script>
-    <script type="module" src="../../public/js/api/index.js"></script>
     <script type="module" src="./js/main.js"></script>
 </head>
 
 <body>
 
-    <div class="loadingBg" id="loadingBg">
-        <div class="loadingBox">
-            <form action="#">
-                <div class="loadingTitle">登录框</div>
-                <div class="loadingInfo">这里提示用户的输入</div>
+    <div class="loginbox">
+        <div class="loginbox-container">
+            <form>
+                <div class="title">登录框</div>
+                <div class="info">这里提示用户的输入</div>
                 <div class="userMsg">
-                    <span class="label">UserName:</span><input type="text" id="UserName" placeholder="请输入账号"
+                    <label for="userName">UserName:&nbsp</label><input type="text" id="userName" placeholder="请输入账号"
                         autocomplete="off">
                     <br><br><br><br>
-                    <span class="label">PassWord:</span><input type="password" id="PassWord" placeholder="请输入密码">
+                    <label for="passWord">PassWord:&nbsp</label><input type="password" id="passWord"
+                        placeholder="请输入密码">
                 </div>
-                <button id="loadIn" class="loadIn">登录</button>
+                <button id="login" class="login">登录</button>
             </form>
-            <div class="loadingClose" id="loadingClose">X</div>
+            <div class="close" id="close">X</div>
         </div>
     </div>
     <div class="masklayerbox">
@@ -48,51 +46,63 @@
         </div>
     </div>
     <div class="userInfobox">
-        <div class="userInfobox-bg">
-            <div class="userInfobox-container">
-                <div class="avaitarbox">
-                    <img src="" alt="">
-                </div>
-                <div class="leftsection">
-                    <div class="header"></div>
-                    <div class="mainer">
-                        <div class="sectionPage">section1</div>
-                        <ul>
-                            <li><div class="item">昵称:</div><span class="userName">源流</span></li>
-                            <li><div class="item">账号:</div><span class="userId">2521151847</span></li>
-                            <li><div class="item">性别:</div><span class="userSex">男</span></li>
-                            <li><div class="item">年龄:</div><span class="userAge">21</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="rightsection">
-                    <div class="header"></div>
-                    <div class="mainer">
-                        <div class="sectionPage">section2</div>
-                        <ul>
-                            <li><div class="item">Pacific&nbspThunder:</div><span class="userName">99</span></li>
-                            <li><div class="item">Greedy&nbspSnake:</div><span class="userId">9</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="close">关闭</div>
+        <div class="userInfobox-container">
+            <div class="avaitarbox">
+                <img src="" alt="">
+                <input type="file" accept="image/*" name="file" id="file">
             </div>
+            <div class="leftsection">
+                <div class="header"></div>
+                <div class="mainer">
+                    <div class="sectionPage">section1</div>
+                    <ul>
+                        <li>
+                            <div class="item">昵称:</div><span class="userName">源流</span>
+                        </li>
+                        <li>
+                            <div class="item">账号:</div><span class="userId">2521151847</span>
+                        </li>
+                        <li>
+                            <div class="item">性别:</div><span class="userSex">男</span>
+                        </li>
+                        <li>
+                            <div class="item">年龄:</div><span class="userAge">21</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="rightsection">
+                <div class="header"></div>
+                <div class="mainer">
+                    <div class="sectionPage">section2</div>
+                    <ul>
+                        <li>
+                            <div class="item">Pacific&nbspThunder:</div><span class="userName">99</span>
+                        </li>
+                        <li>
+                            <div class="item">Greedy&nbspSnake:</div><span class="userId">9</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="close">关闭</div>
+            <div class="logout">退出||登录</div>
         </div>
     </div>
     <div class="header sharing-width">
-        <div class="h-nav sharing-width clearfix">
+        <div class="header-container">
             <div class="currentPage">
                 主页
             </div>
-            <div class="home">
+            <div class="homebox">
                 <a href="./index.html">
                     <img src="../../public/image/home.png" alt="">
                 </a>
             </div>
-            <div id="user" class="user">
+            <div class="userbox">
                 <div class="iconfont icon-linecar105"></div>
-                <div id="userImgBg" class="userImgBg">
-                    <div id="userImg" class="userImg">
+                <div class="avatarbox">
+                    <div class="avatar">
                         <img src="" alt="" onerror="this.src='/public/image/users/uuid.png';onerror=null">
                     </div>
                 </div>

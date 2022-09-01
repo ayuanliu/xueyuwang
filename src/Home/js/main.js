@@ -1,20 +1,11 @@
-import { } from "./showWebsite.js";
+import { reqAvatar, reqGetAvatat, reqGreegySnake, reqPacificThunder, reqPutAvatar } from "../../api/index.js";
+import "./showWebsite.js";
 window.onload = function () {
-    // document.body.style.zoom = 0.8;
-    // 页面加载完成立刻查看本地是否有token有则带着token去请求用户头像
-
-    homeInit();
-
-    user();
-    registerBtn()
-    userBtn();
-    admine();
-    login();
-    userInfo();
-
+    header_userbox();
+    loginbox();
+    userInfobox();
     // 轮播图
     swiper();
-
     // 旋转图
     studySwiper();
 }
@@ -177,5 +168,195 @@ function studySwiper() {
                 callback && callback();
             }
         }, 15);
+    }
+}
+// header右边盒子
+function header_userbox() {
+    const userbox = document.querySelector('.header .userbox');
+    const register = userbox.children[2];
+    const avatar = userbox.children[1].children[0];
+    // 查看本地是否有token有则带着token去请求用户头像
+    if (localStorage.getItem('token')) {
+        reqAvatar().then(response => {
+            avatar.children[0].src = response;
+            userbox.removeChild(userbox.children[0]);
+            userbox.removeChild(userbox.children[1]);
+            userbox.onmouseenter = null;
+            userbox.onmouseleave = null;
+            (function () {
+                const userInfobox = document.querySelector('.userInfobox');
+                const userInfoboxavatar = userInfobox.children[0].children[0].children[0];
+                const ul = userInfobox.children[0].children[2].children[1].children[1]
+                const pacificThunderScore = ul.children[0].children[1];
+                const greedySnakeScore = ul.children[1].children[1];
+                avatar.onclick = function () {
+                    // 获取需要的数据
+                    reqPacificThunder().then(response => {
+                        if (response.length == 0) {
+                            pacificThunderScore.innerHTML = 0;
+                            return;
+                        }
+                        response.sort(function (a, b) {
+                            return b - a;
+                        })
+                        pacificThunderScore.innerHTML = response[0];
+                    });
+                    reqGreegySnake().then(response => {
+                        if (response.length == 0) {
+                            greedySnakeScore.innerHTML = 0;
+                            return;
+                        }
+                        response.sort(function (a, b) {
+                            return b - a;
+                        })
+                        greedySnakeScore.innerHTML = response[0];
+                    })
+                    userInfoboxavatar.src = response;
+                    userInfobox.style.display = 'block';
+                }
+            })(avatar)
+        });
+    }
+    userbox.onmouseenter = function () {
+        register.style.display = 'block';
+        move(userbox, 'width', 200, 3);
+    }
+    userbox.onmouseleave = function () {
+        move(userbox, 'width', 100, 5, function () {
+            register.style.display = 'none';
+        });
+    }
+    register.onclick = function () {
+        // 点击跳转到注册页面
+        location.href = '../../src/register/index.html'
+    }
+    avatar.onclick = function () {
+        loginbox()
+        function loginbox() {
+            const loginbox = document.querySelector('.loginbox');
+            loginbox.style.display = 'block';
+        }
+    }
+}
+// 登录盒子
+function loginbox() {
+    const loginbox = document.querySelector('.loginbox');
+    const loginboxContainer = loginbox.children[0];
+    const userName = loginboxContainer.children[0].children[2].children[1]
+    const passWord = loginboxContainer.children[0].children[2].children[7]
+    const login = loginboxContainer.children[0].children[3];
+    const close = loginboxContainer.children[1]
+    userName.onfocus = function () {
+        this.placeholder = '';
+    }
+    userName.onblur = function () {
+        this.placeholder = '请输入账号';
+    }
+    passWord.onfocus = function () {
+        this.placeholder = '';
+    }
+    passWord.onblur = function () {
+        this.placeholder = '请输入密码';
+    }
+    login.onclick = function (event) {
+        let uName = userName.value;
+        let pW = passWord.value;
+        // 获取到所有的用户并且处理数据
+        sendAJAX('GET', '/users', undefined, function (result) {
+            const users = result;
+            for (let i = 0; i < users.length; i++) {
+                // 如果成功登录
+                if (uName === users[i].uName && pW === users[i].pW) {
+                    reqAvatar().then(response => {
+                        userbox(response);
+                        loginbox.style.display = 'none';
+                    })
+                    localStorage.setItem('token', users[i].token);
+                    event.preventDefault();
+                    return;
+                }
+            }
+            console.log('账号或密码错误');
+        });
+        event.preventDefault();
+    }
+    close.onclick = function () {
+        loginbox.style.display = 'none';
+    }
+    // 自动获取焦点
+    userName.focus();
+
+    function userbox(src) {
+        const userbox = document.querySelector('.header .userbox');
+        const avatar = userbox.children[1].children[0]
+        avatar.children[0].src = src;
+        userbox.removeChild(userbox.children[0]);
+        userbox.removeChild(userbox.children[1]);
+        userbox.onmouseenter = null;
+        userbox.onmouseleave = null;
+        avatar.onclick = function () {
+            const userInfobox = document.querySelector('.userInfobox');
+            const userInfoboxavatar = userInfobox.children[0].children[0].children[0];
+            const ul = userInfobox.children[0].children[2].children[1].children[1]
+            const pacificThunderScore = ul.children[0].children[1];
+            const greedySnakeScore = ul.children[1].children[1];
+            // 获取需要的数据
+            reqPacificThunder().then(response => {
+                if (response.length == 0) {
+                    pacificThunderScore.innerHTML = 0;
+                    return;
+                }
+                response.sort(function (a, b) {
+                    return b - a;
+                })
+                pacificThunderScore.innerHTML = response[0];
+            });
+            reqGreegySnake().then(response => {
+                if (response.length == 0) {
+                    greedySnakeScore.innerHTML = 0;
+                    return;
+                }
+                response.sort(function (a, b) {
+                    return b - a;
+                })
+                greedySnakeScore.innerHTML = response[0];
+            })
+            userInfoboxavatar.src = src;
+            userInfobox.style.display = 'block';
+        }
+    }
+}
+// 用户信息盒子
+function userInfobox() {
+    const userInfobox = document.querySelector('.userInfobox');
+    const avatarbox = userInfobox.children[0].children[0];
+    const userInfoboxAvatar = avatarbox.children[0];
+    const inputFile = avatarbox.children[1];
+    const close = userInfobox.children[0].children[3];
+    const logout = userInfobox.children[0].children[4];
+    inputFile.style.display = 'none';
+    avatarbox.onclick = function (e) {
+        inputFile.click();
+    }
+    inputFile.onchange = function (e) {
+        let read = new FileReader()
+        let file = e.target.files[0]
+        read.readAsDataURL(file);
+        read.onload = function () {
+            userInfoboxAvatar.src = read.result;
+            // 将图片上传到服务器
+            // 获取到头像数据的id
+            reqGetAvatat().then(response => {
+                response.data = read.result;
+                reqPutAvatar(response.id, response);
+            })
+        }
+    }
+    close.onclick = function () {
+        userInfobox.style.display = 'none';
+    }
+    logout.onclick = function () {
+        localStorage.removeItem('token');
+        location.reload();
     }
 }

@@ -1,7 +1,7 @@
+import { reqPostAvatar } from "../../api/index.js";
 import { createRoot, Node } from "./database.js";
 
 window.onload = function () {
-    // document.body.style.zoom = 0.8;
     verifyFormat();
 }
 // 验证账号与密码的格式等
@@ -117,19 +117,27 @@ function verifyFormat() {
                     root.insertTree(users[i].uName);
                 }
                 // 判断注册的账号是否存在树中
-                if(Node.isInTree(uName)){
+                if (Node.isInTree(uName)) {
                     console.log('账号已存在');
-                }else{
-                    root=null;
+                } else {
+                    root = null;
                     resolve();
-                } 
+                }
             })
         });
         p.then((value) => {
             // 发送POST请求
-            sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}&token=${'t'+uName}`, function () {
-                console.log('注册成功');
-                location.replace('http://127.0.0.1:5500/src/home/index.html');
+            sendAJAX('POST', '/users', `id=&uName=${uName}&pW=${pW}&token=${'t' + uName}`, function () {
+                reqPostAvatar({
+                    id: null,
+                    token: `t${uName}`,
+                    avatar: true,
+                    data: ''
+                }).then(response => {
+                    console.log('注册成功');
+                    location.replace('http://127.0.0.1:5500/src/home/index.html');
+                })
+
             })
         })
     }
