@@ -13,12 +13,15 @@ function swiper() {
     // 在这制作游戏轮播图
     var gameList = document.getElementById('gameList');
     var gameArr = gameList.children;
-    var distance = gameList.offsetWidth / gameArr.length;
+    // 每次移动距离为一个li宽度
+    const distance = gameArr[0].offsetWidth;
     var gameButton = document.getElementById('gameButton');
     var lis = new Array();
     var buttonNum = gameArr.length;
     var index = 0;
     var autoPlayTimer;
+    // 设置ul宽度
+    gameList.style.width = distance * gameArr.length + 'px';
     // 根据图片的个数创建按钮的个数
     for (let i = 0; i < buttonNum - 1; i++) {
         lis[i] = document.createElement('li');
@@ -218,10 +221,17 @@ function header_userbox() {
         });
     }
     userbox.onmouseenter = function () {
+        const iconfont = this.children[0];
         register.style.display = 'block';
+        iconfont.style.transition = '1s';
+        iconfont.style.rotate = '180deg';
         move(userbox, 'width', 200, 3);
+        // 左箭头进行旋转
     }
     userbox.onmouseleave = function () {
+        const iconfont = this.children[0];
+        iconfont.style.transition = '1s';
+        iconfont.style.rotate = '0deg';
         move(userbox, 'width', 100, 5, function () {
             register.style.display = 'none';
         });

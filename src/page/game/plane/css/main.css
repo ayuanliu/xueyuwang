@@ -376,8 +376,8 @@
         /* 障碍物 */
         .obstruct {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 25px;
+            height: 25px;
             background-color: rgba(0, 0, 0, .5);
             z-index: 999;
         }
@@ -387,8 +387,8 @@
             position: absolute;
             /* width: 66px; */
             /* height: 68px; */
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             background-image: url("../image/飞机1.png");
             background-size: contain;
         }
@@ -423,6 +423,29 @@
         }
 
         /* 怪物 */
+        .snakeMonsterHead{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background-color: red;
+            z-index: 1;
+        }
+        .snakeMonsterBody{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 25px;
+            background-color: pink;
+            z-index: 1;
+        }
+        .vineCage{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-image: url('../image/vineCage.png');
+            background-color: red;
+        }
         .monster1,
         .monster2,
         .monster3,
@@ -430,8 +453,8 @@
             position: absolute;
             /* width: 66px; */
             /* height: 68px; */
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             background-size: contain;
         }
 
@@ -452,12 +475,13 @@
         }
 
         /* 雨滴 */
-        .rain1 {
+        .rain{
             position: absolute;
+        }
+        .rain1 {
             width: 20px;
             height: 50px;
             transform: scaleX(0.1);
-            /* transform: scale(0.2); */
         }
 
         .rain-tail1 {
@@ -475,7 +499,6 @@
         }
 
         .rain2 {
-            position: absolute;
             width: 30px;
             height: 80px;
             transform: scaleX(0.1);

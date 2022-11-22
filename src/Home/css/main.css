@@ -18,7 +18,7 @@
     color: rgb(236, 235, 235);
     font: italic bold 50px "Microsoft YaHei";
     text-align: center;
-    text-shadow: 5px 4px 4px black;   
+    text-shadow: 5px 4px 4px black;
 }
 
 .header .homebox {
@@ -79,6 +79,7 @@
 .header .userbox .avatar:hover {
     outline: medium solid rgba(255, 255, 255, 0.5);
 }
+
 .header .userbox .avatar img {
     width: 100%;
 }
@@ -130,7 +131,8 @@
     overflow: hidden;
     z-index: 9999;
 }
-.userInfobox .logout{
+
+.userInfobox .logout {
     position: absolute;
     top: 130px;
     left: 0;
@@ -146,9 +148,11 @@
     cursor: pointer;
     transition: all .2s;
 }
-.userInfobox .logout:hover{
+
+.userInfobox .logout:hover {
     background-color: rgba(201, 185, 185, 0.5);
 }
+
 .userInfobox .close {
     position: absolute;
     bottom: 0;
@@ -178,9 +182,11 @@
     cursor: pointer;
     transition: all .2s;
 }
-.userInfobox .avaitarbox:hover{
+
+.userInfobox .avaitarbox:hover {
     outline: medium solid rgba(0, 0, 0, 0.5);
 }
+
 .userInfobox .avaitarbox img {
     width: 100%;
 }
@@ -473,6 +479,7 @@
     margin: 0 auto;
     text-align: right;
 }
+
 .loginbox form .title {
     margin: 0 auto;
     margin-top: 64px;
@@ -483,6 +490,7 @@
     text-align: center;
     border-top: 3px solid red;
 }
+
 .loginbox form .info {
     margin: 10px 0 -33px;
     height: 23px;
@@ -491,15 +499,18 @@
     background-color: #fff;
     display: none;
 }
+
 .loginbox form .userMsg {
     margin-top: 48px;
     width: 320px;
     font-weight: bold;
 }
+
 .loginbox .label {
     font-size: 16px;
     margin-right: 8px;
 }
+
 .loginbox input {
     width: 160px;
     height: 24px;
@@ -681,15 +692,41 @@ a:hover .moreoperator {
     background-color: rgb(229, 229, 229);
 }
 
-.aside {
-    width: 100px;
+.main .aside {
+    position: sticky;
+    top: 100px;
+    width: 200px;
     height: 500px;
-    background-color: red;
+    background-color: rgb(195, 188, 189);
     float: left;
+    text-align: center;
+}
+
+.main .aside li {
+    height: 30px;
+    line-height: 30px;
+}
+
+.main .aside li:hover {
+    color: rgb(133, 123, 123);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.main .aside .title {
+    height: 50px;
+    font: normal bold 20px 'Microsoft YaHei';
+    line-height: 50px;
+}
+
+.main .aside .sTitle {
+    border-top: 2px solid rgb(210, 209, 209);
+    padding: 10px;
+    font: normal bold 15px 'Microsoft YaHei';
 }
 
 .mainsection {
-    width: 752px;
+    width: 400px;
     margin-left: auto;
     margin-right: 0;
     background: rgba(93, 78, 78, 0.1);
@@ -704,7 +741,7 @@ a:hover .moreoperator {
 
 .game {
     position: relative;
-    width: 600px;
+    width: 300px;
     height: 300px;
     background-color: rgb(123, 125, 127);
     margin: 0 auto;
@@ -714,33 +751,29 @@ a:hover .moreoperator {
 
 .gameList {
     position: absolute;
-    width: 2400px;
 }
 
 .gameList li {
     float: left;
+    width: 300px;
     background-color: rgb(120, 119, 119);
 }
 
 .gameList li a {
     position: relative;
     display: block;
-    width: 600px;
     height: 300px;
 }
-
+.gameList li a{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
 .gameList li .game1 {
     background-image: url('../image/Pacific\ Thunder.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .gameList li .game2 {
     background-image: url('../image/Greedy\ Snake.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .gameList li a .pfTd {
@@ -757,8 +790,8 @@ a:hover .moreoperator {
     right: 0;
     top: 0;
     bottom: 0;
-    font-size: 50px;
-    color: rgb(112, 129, 145);
+    font-size: 30px;
+    color: rgb(71, 81, 91);
     text-align: center;
     font-weight: bold;
     animation: paly 2s infinite linear;
@@ -809,7 +842,7 @@ a:hover .moreoperator {
 
 .page {
     position: relative;
-    width: 700px;
+    width: 300px;
     margin: auto;
     background-color: rgba(118, 118, 118, .5);
     border: 6px dotted rgb(152, 113, 113);
@@ -823,8 +856,8 @@ a:hover .moreoperator {
 
 .study {
     position: relative;
-    width: 700px;
-    height: 570px;
+    width: 300px;
+    height: 470px;
     margin: auto;
     transform-style: preserve-3d;
 }
@@ -833,8 +866,8 @@ a:hover .moreoperator {
     position: absolute;
     left: 0;
     right: 0;
-    width: 140px;
-    height: 400px;
+    width: 50px;
+    height: 300px;
     margin: auto;
     margin-top: 80px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
@@ -842,32 +875,31 @@ a:hover .moreoperator {
 }
 
 .study a:nth-child(1) {
-    transform: translateZ(180px);
+    transform: translateZ(90px);
 }
 
 .study a:nth-child(2) {
-    transform: rotateY(60deg) translateZ(180px);
+    transform: rotateY(60deg) translateZ(90px);
 }
 
 .study a:nth-child(3) {
-    transform: rotateY(120deg) translateZ(180px);
+    transform: rotateY(120deg) translateZ(90px);
 }
 
 .study a:nth-child(4) {
-    transform: rotateY(180deg) translateZ(180px);
+    transform: rotateY(180deg) translateZ(90px);
 }
 
 .study a:nth-child(5) {
-    transform: rotateY(-120deg) translateZ(180px);
+    transform: rotateY(-120deg) translateZ(90px);
 }
 
 .study a:nth-child(6) {
-    transform: rotateY(-60deg) translateZ(180px);
+    transform: rotateY(-60deg) translateZ(90px);
 }
 
 .study .text {
-    width: 70px;
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
     color: black;
     margin: 0 auto;
@@ -876,12 +908,12 @@ a:hover .moreoperator {
 .page .buttonL,
 .page .buttonR {
     position: absolute;
-    top: 280px;
+    top: 250px;
     left: 10px;
-    width: 50px;
-    height: 80px;
-    line-height: 80px;
-    font-size: 50px;
+    width: 30px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
     background-color: rgba(146, 140, 140, 0.5);
     outline: 1px solid black;
     cursor: pointer;
@@ -890,13 +922,4 @@ a:hover .moreoperator {
 .page .buttonR {
     left: auto;
     right: 10px;
-}
-
-.page .enter {
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
-    background-color: rgba(72, 184, 167, .5);
-    margin: 0 auto;
-    margin-bottom: 10px;
 }

@@ -4,8 +4,11 @@
         borderWidth 边框的大小      
 */
 const borderWidth = parseInt(getComputedStyle(document.body)['border-width']);
+const bodyHeight = parseInt(getComputedStyle(document.body)['height']);
+const bodyWidth = parseInt(getComputedStyle(document.body)['width']);
 /*--------------------------------------------------------*/
-const size = 50;
+// 角色的大小
+const size = 30;
 let character = null;
 // 角色初始化
 /*--------------------------------------------------------*/
@@ -16,16 +19,18 @@ export function createCharacter() {
     character = document.createElement("div");
     character.className = "character";
     document.body.appendChild(character);
-    character.style.top = document.body.offsetHeight / 2 - character.offsetHeight / 2 + "px";
-    character.style.left = document.body.offsetWidth / 2 - character.offsetWidth / 2 + "px";
-    character.up = 0;
-    character.down = 0;
-    character.left = 0;
-    character.right = 0;
-    character.shootDirectionY = 1;
-    character.shootDirectionX = 1;
-    character.shootFlag = 0;
-    character.weapon = 0;
+    character.style.top = bodyHeight / 2 - character.offsetHeight / 2 + "px";
+    character.style.left = bodyWidth / 2 - character.offsetWidth / 2 + "px";
+    Object.assign(character, {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0,
+        shootDirectionY: 1,
+        shootDirectionX: 1,
+        shootFlag: 0,
+        weapon: 0
+    })
     control(character);
     return character;
 }
@@ -76,7 +81,6 @@ function control(obj) {
     // 控制角色
     document.onkeydown = function (event) {
         event = event || window.event;
-        // console.log(event.keyCode);
         switch (event.keyCode) {
             case 87:
                 obj.up = -1;
@@ -91,6 +95,7 @@ function control(obj) {
                 obj.right = 1;
                 break;
             case 74:
+                // 普通攻击
                 obj.shoot = 1;
                 break;
             case 79:
@@ -109,6 +114,7 @@ function control(obj) {
                 alert("暂停");
                 break;
         }
+        // 改变角色状态
         updataObj(obj);
     }
     document.onkeyup = function (event) {
@@ -143,7 +149,10 @@ function control(obj) {
     }
 }
 
+// 角色切换武器
+export function characterChangeWeapon() {
 
+}
 // 角色攻击
 /*--------------------------------------------------------*/
 /*
@@ -154,16 +163,14 @@ export function characterShoot(callback) {
     if (character.shoot) {
         callback && callback(character.shoot);
         // 技能使用一次会冷却
-        if (character.shoot === 2) {
-            character.shoot = 0;
-        }else if(character.shoot === 3){
-            character.shoot = 0;
-        }
+        // if (character.shoot === 2) {
+        //     character.shoot = 0;
+        // } else if (character.shoot === 3) {
+        //     character.shoot = 0;
+        // }
     }
 }
 /*--------------------------------------------------------*/
-
-
 // 角色移动
 /*--------------------------------------------------------*/
 /* 
@@ -180,80 +187,80 @@ export function characterMove(mapArr, speed) {
         obj.offsetTop为包括定位元素边框的垂直距离
         为了统一使用减去边框的值
     */
+    // lattice一格的大小
+    let lattice = mapArr.lattice;
+    let cTop = character.offsetTop;
+    let cLeft = character.offsetLeft;
+    let cHeight = character.offsetHeight;
+    let cWidth = character.offsetWidth;
+    let { up, left, right, down } = character;
+    // 这个是X按数组的坐标方向
+    let t = Math.floor((cTop - borderWidth) / lattice);
+    let l = Math.floor((cLeft - borderWidth) / lattice);
+    let r = Math.floor((cLeft + size - borderWidth) / lattice);
+    let b = Math.floor((cTop + size - borderWidth) / lattice);
     // 将自身位置左上点映射成数组位置
-    let lTX = Math.floor((character.offsetTop - borderWidth) / 50);
-    let lTY = Math.floor((character.offsetLeft - borderWidth) / 50);
+    let lTX = t, lTY = l;
     // 将自身位置右上点映射成数组位置
-    let rTX = Math.floor((character.offsetTop - borderWidth) / 50);
-    let rTY = Math.floor((character.offsetLeft + size - borderWidth) / 50);
+    let rTX = t, rTY = r;
     // 将自身位置左下点映射成数组位置
-    let lBX = Math.floor((character.offsetTop + size - borderWidth) / 50);
-    let lBY = Math.floor((character.offsetLeft - borderWidth) / 50);
+    let lBX = b, lBY = l;
     // 将自身位置右下点映射成数组位置
-    let rBX = Math.floor((character.offsetTop + size - borderWidth) / 50);
-    let rBY = Math.floor((character.offsetLeft + size - borderWidth) / 50);
-    // 如果到达边界则不能移动
-    if (character.offsetTop - speed < borderWidth && character.up == -1) {
-        return;
-    } else if (character.offsetTop + speed + borderWidth + character.offsetHeight > document.body.offsetHeight && character.down == 1) {
-        return;
-    } else if (character.offsetLeft - speed < borderWidth && character.left == -1) {
-        return;
-    } else if (character.offsetLeft + speed + borderWidth + character.offsetWidth > document.body.offsetWidth && character.right == 1) {
-        return;
-    }
-    // 如果进入障碍物则不能移动并且回退
-    // 障碍物只会在边界内
-    if (lTX >= 0 && lTX < 12 && lTY >= 0 && lTY < 23) {
-        if (disableMove(lTX, lTY)) {
-            return;
-        }
-        if (disableMove(rTX, rTY)) {
-            return;
-        }
-        if (disableMove(lBX, lBY)) {
-            return;
-        }
-        if (disableMove(rBX, rBY)) {
-            return;
-        }
-    }
-    function disableMove(pointX, pointY) {
+    let rBX = b, rBY = r;
+    // 如果进入障碍物则不能移动
+    if (disableMove()) return;
+    function disableMove() {
+        let originMap = mapArr.originMap;
         // 向上
         if (character.up == -1) {
             // 进行虚拟向上
-            let x = Math.floor((character.offsetTop - borderWidth - speed) / 50);
-            if (x > 0 && mapArr[x][pointY] == 1) {
-                return true;
+            let x = Math.floor((cTop - borderWidth - speed) / lattice);
+            if (x >= 0) {
+                if (originMap[x][lTY] == 1 || originMap[x][rTY] == 1) return true;
+                if (originMap[x][lTY] == 2 || originMap[x][rTY] == 2) return true;
             }
         }
         // 向下
         if (character.down == 1) {
             // 进行虚拟向下
-            let x = Math.floor((character.offsetTop + size - borderWidth + speed) / 50);
-            if (x > 0 && mapArr[x][pointY] == 1) {
-                return true;
+            let x = Math.floor((cTop + size - borderWidth + speed) / lattice);
+            if (x >= 0) {
+                if (originMap[x][lBY] == 1 || originMap[x][rBY] == 1) return true;
+                if (originMap[x][lBY] == 2 || originMap[x][rBY] == 2) return true;
             }
         }
         // 向左
         if (character.left == -1) {
             // 进行虚拟向左
-            let y = Math.floor((character.offsetLeft - borderWidth - speed) / 50);
-            if (y >= 0 && mapArr[pointX][y] == 1) {
-                return true;
+            let y = Math.floor((cLeft - borderWidth - speed) / lattice);
+            if (y >= 0) {
+                if (originMap[lTX][y] == 1 || originMap[lBX][y] == 1) return true;
+                if (originMap[lTX][y] == 2 || originMap[lBX][y] == 2) return true;
             }
         }
         // 向右
         if (character.right == 1) {
             // 进行虚拟向右
-            let y = Math.floor((character.offsetLeft + size - borderWidth + speed) / 50);
-            if (y > 0 && mapArr[pointX][y] == 1) {
-                return true;
+            let y = Math.floor((cLeft + size - borderWidth + speed) / lattice);
+            if (y >= 0) {
+                if (originMap[rTX][y] == 1 || originMap[rBX][y] == 1) return true;
+                if (originMap[rTX][y] == 2 || originMap[rBX][y] == 2) return true;
             }
         }
         return false;
     }
-    character.style.top = character.offsetTop + (character.up + character.down) * speed - borderWidth + "px";
-    character.style.left = character.offsetLeft + (character.left + character.right) * speed - borderWidth + "px";
+    // 如果到达边界则不能移动
+    if (cTop - speed < borderWidth && up == -1) {
+        return;
+    } else if (cTop + speed + borderWidth + cHeight > bodyHeight && down == 1) {
+        return;
+    } else if (cLeft - speed < borderWidth && left == -1) {
+        return;
+    } else if (cLeft + speed + borderWidth + cWidth > bodyWidth && right == 1) {
+        return;
+    }
+    // 移动
+    character.style.top = cTop + (up + down) * speed - borderWidth + "px";
+    character.style.left = cLeft + (left + right) * speed - borderWidth + "px";
 }
 /*--------------------------------------------------------*/

@@ -136,8 +136,3 @@ export function collide4(arr1, arr2, callback) {
 export function collide5(arr1, arr2, callback) {
 
 }
-
-// // 障碍物与子弹
-// export function collide6(arr1,arr2,callback){
-
-// }

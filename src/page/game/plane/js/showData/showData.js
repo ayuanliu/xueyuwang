@@ -14,7 +14,7 @@ export function outInShowData() {
 }
 
 export function addScore(num) {
-    num ? value = value + num : value++;
+    num ? value = value + num : null //value++;
     score.innerHTML = value;
 }
 export function getScore() {

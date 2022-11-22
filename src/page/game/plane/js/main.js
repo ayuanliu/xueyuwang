@@ -2,9 +2,9 @@ import { gameLoad } from './game.js'
 import { getLeaderboard } from './menu/menu.js';
 import { outInShowData } from './showData/showData.js';
 window.onload = function () {
-    var startMenu = document.querySelector('.startMenu');
+    let startMenu = document.querySelector('.startMenu');
     // 给按钮添加点击事件
-    var btns = document.querySelectorAll('.btns button');
+    let btns = document.querySelectorAll('.btns button');
     btns[0].onclick = function () {
         let explain = document.querySelector('.explain')
         let back = document.querySelector('.explain div:first-child')
@@ -16,7 +16,7 @@ window.onload = function () {
         }
     }
     btns[1].onclick = function () {
-        var countdown = document.querySelector('.countdown');
+        let countdown = document.querySelector('.countdown');
         startMenu.style.display = 'none';
         countdown.style.display = 'block';
         let i = 3;

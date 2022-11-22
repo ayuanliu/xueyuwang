@@ -1,23 +1,14 @@
-.masklayerbox{
-    display: none;
-    font-size: 20px;
-}
 /* 带有遮罩层的盒子 */
-.masklayerbox-bg {
+.addWebsitebox{
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     z-index: 999;
+    display: none;
 }
 
-.masklayerbox form {
-    width: 400px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.masklayerbox-container {
+.addWebsitebox-container {
     position: absolute;
     width: 800px;
     height: 480px;
@@ -31,7 +22,13 @@
     z-index: 9999;
 }
 
-.masklayerbox-title {
+.addWebsitebox form {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.addWebsitebox .title {
     border-top: 3px solid red;
     margin-top: 64px;
     padding-top: 8px;
@@ -42,14 +39,14 @@
     color: rgb(83, 83, 78);
 }
 
-.masklayerbox-content {
+.addWebsitebox .content {
     margin: 0 auto;
     margin-top: 48px;
     width: 320px;
     font-weight: bold;
 }
 
-.masklayerbox-input {
+.addWebsitebox .input {
     width: 160px;
     height: 24px;
     border: 2px solid black;
@@ -57,7 +54,7 @@
     text-indent: 8px;
 }
 
-.masklayerbox-close {
+.addWebsitebox .close {
     position: absolute;
     top: -16px;
     right: -16px;
@@ -71,7 +68,7 @@
     cursor: pointer;
 }
 
-.masklayerbox-btn {
+.addWebsitebox .add {
     display: block;
     width: 96px;
     height: 32px;
@@ -84,11 +81,11 @@
     cursor: pointer;
 }
 
-.masklayerbox-container label {
+.addWebsitebox label {
     font-size: 1em;
 }
 
-.masklayerbox-info{
+.addWebsitebox .info{
     height: 18px;
     margin-top: 8px;
     margin-bottom: -26px;

@@ -1,16 +1,15 @@
 /*--------------------------------------------------------*/
+import { mapArr } from "../obstruction/obstruction.js";
+import { getRoute } from "./getRoute.js";
+import { move } from "./utils.js";
 /*
     body部分
         borderWidth 边框的大小      
 */
 const borderWidth = parseInt(getComputedStyle(document.body)['border-width']);
 /*--------------------------------------------------------*/
-// 网格大小
-const size = 50;
-// 数组宽
-const mapWidth = 23;
-// 数组高
-const mapHeight = 12;
+// 网格大小 数组宽(从0开始) 数组高(从0开始)
+const { lattice, mapWidth, mapHeight } = mapArr;
 /*
     怪物部分
         MonsterFlag         是否允许创建怪物 这里用来作开关
@@ -19,7 +18,6 @@ const mapHeight = 12;
 */
 const MonsterArr = new Array();
 var MonsterFlag = 0;
-var MonsterSetDirection = 0;
 var createMonsterTimer = 0;
 // 创建怪物
 /*--------------------------------------------------------*/
@@ -27,64 +25,100 @@ var createMonsterTimer = 0;
     参数:
         Monsternum: 一次出现怪物最多个数为(Monsternum+1)
 */
-export function createMonster(Monsternum,mapArr) {
+let snakeMonsterFlag = 0;
+export function createMonster(Monsternum) {
     if (!MonsterFlag) {
         MonsterFlag = 1;
         createMonsterTimer = setTimeout(function () {
             // 创建一批怪物放置在随机位置(距离边界200px)并添加进数组方便管理
-            for (var i = 0; i < Math.round(Math.random() * Monsternum) + 1; i++) {
-                MonsterSetDirection = Math.round(Math.random() * 3);
-                let tempX = Math.round(Math.random() * 12);
-                let tempY = Math.round(Math.random() * 23);
-                let top = 0;
-                let left = 0;
-                let mappingX = 0;
-                let mappingY = 0;
-                top = tempX*size;
-                left = tempY*size;
-                // 分为4区域产怪
-                if (MonsterSetDirection == 0) {
-                    top = 0;
-                    mappingX = 0;
-                    mappingY = tempY;
-
-                } else if (MonsterSetDirection == 1) {
-                    left = 0;
-                    mappingX = tempX;
-                    mappingY = 0;
-                } else if (MonsterSetDirection == 2) {
-                    top = 12 * size;
-                    mappingX = 12;
-                    mappingY = tempY;
-                } else if (MonsterSetDirection == 3) {
-                    left = 23 * size;
-                    mappingX = tempX;
-                    mappingY = 23;
-                }
-                if (mapArr[mappingX][mappingY] == 0) {
-                    var monster = document.createElement("div");
-                    var bgcSelect = Math.round(Math.random() * 3);
-                    if (bgcSelect == 0) {
-                        monster.className = "monster1";
-                    } else if (bgcSelect == 1) {
-                        monster.className = "monster2";
-                    } else if (bgcSelect == 2) {
-                        monster.className = "monster3";
-                    } else if (bgcSelect == 3) {
-                        monster.className = "monster4";
-                    }
+            for (let i = 0; i < Math.round(Math.random() * Monsternum) /*+ 1*/; i++) {
+                let { mappingX, mappingY, top, left } = setMonster();
+                if (mapArr.originMap[mappingX][mappingY] === 0) {
+                    let monster = document.createElement("div");
+                    let bgcSelect = Math.floor(Math.random() * 4) + 1;
+                    monster.className = `monster${bgcSelect}`;
                     document.body.appendChild(monster);
-                    // 初始化路线为空数组
-                    monster.route = [];
                     monster.style.left = left + 'px';
                     monster.style.top = top + 'px';
-                    monster.mappingX = mappingX;
-                    monster.mappingY = mappingY;
-                    MonsterArr[MonsterArr.length] = monster;
+                    // 初始化路线为空数组
+                    Object.assign(monster, {
+                        route: [],
+                        _monsterName: 'commonMonsterRoute',
+                        mappingX,
+                        mappingY
+                    })
+                    MonsterArr.push(monster);
                 }
             }
             MonsterFlag = 0;
-        }, 4000);
+        }, 2000);
+    }
+    // 放置怪物
+    function setMonster() {
+        let MonsterSetDirection = Math.round(Math.random() * 3);
+        let mappingX = Math.round(Math.random() * mapHeight);
+        let mappingY = Math.round(Math.random() * mapWidth);
+        // 分为4区域产怪
+        switch (MonsterSetDirection) {
+            case 0:
+                mappingX = 0;
+                break;
+            case 1:
+                mappingY = 0;
+                break;
+            case 2:
+                mappingX = mapHeight;
+                break;
+            case 3:
+                mappingY = mapWidth;
+                break;
+        }
+        return { mappingX, mappingY, top: mappingX * lattice, left: mappingY * lattice };
+    }
+    // ...待解决什么时候添加蛇boss
+    if (!snakeMonsterFlag) {
+        let { mappingX, mappingY, top, left } = setMonster();
+        createSnakeMonster(mappingX, mappingY, top, left);
+        snakeMonsterFlag = 1;
+    }
+    // 创建一个蛇boss 蛇由圆节点连接成
+    function createSnakeMonster(mappingX, mappingY, top, left) {
+        let snakeArr = [];
+        // 初始化创建蛇boss
+        // 蛇头
+        snakeArr.push(`
+            <div class="snakeMonsterHead" style="top:${top}px;left:${left}px;"></div>
+        `)
+        for (let i = 0; i < 20; i++) {
+            snakeArr.push(`
+            <div class="snakeMonsterBody" style="top:${top}px;left:${left}px;"></div>
+        `)
+        }
+        document.body.insertAdjacentHTML('beforeend', snakeArr.join(''));
+        let head = document.querySelector('.snakeMonsterHead');
+        let bodys = document.querySelectorAll('.snakeMonsterBody');
+        Object.assign(head, {
+            order: 0,
+            route: [],
+            _monsterName: 'snakeMonsterHeadRoute',
+            historyRoute: [],
+            mappingX,
+            mappingY
+        })
+        MonsterArr.push(head);
+        for (let i = 0; i < bodys.length; i++) {
+            let body = bodys[i];
+            i == 0 ? body.pre = head : body.pre = bodys[i - 1];
+            Object.assign(body, {
+                order: i + 1,
+                route: [],
+                _monsterName: 'snakeMonsterBodyRoute',
+                historyRoute: [],
+                mappingX,
+                mappingY,
+            })
+            MonsterArr.push(body);
+        }
     }
 }
 /*--------------------------------------------------------*/
@@ -97,22 +131,31 @@ export function getMonsterArr() {
         monster 怪物
 */
 export function monsterShoot(monster, callback) {
-    if (monster.shootTimer == undefined) {
-        monster.shootTimer = 250;
-    }
+    if (monster.shootTimer == undefined) setTimes();
     if (monster.shootTimer > 0) {
         monster.shootTimer--;
     } else {
-        monster.shootTimer = 250;
+        setTimes();
         // 根据怪物移动方向进行攻击
         monster.shootFlag = 0;
-        callback && callback();
+        // 如果是蛇boss则monster.shoot = 2;
+        if (monster._monsterName === 'snakeMonsterHeadRoute') {
+            monster.shoot = 2;
+        } else {
+            monster.shoot = 1;
+        }
+        // 发动攻击
+        callback && callback(monster.shoot);
+    }
+    function setTimes() {
+        if (monster._monsterName === 'snakeMonsterHeadRoute') {
+            monster.shootTimer = 200;
+        } else {
+            monster.shootTimer = 200;
+        }
     }
 }
-
-
-
-// 显示怪物
+// 怪物移动
 /*--------------------------------------------------------*/
 /*
     参数:
@@ -121,106 +164,31 @@ export function monsterShoot(monster, callback) {
         beforeMove:       在怪物移动之前执行
         afterMove:        在怪物移动之后执行
 */
+let snakeBodySpace = 8;
 export function monsterMove(character, speedMonster, beforeMove, afterMove) {
     // 将自身在的位置映射成数组位置
-
     for (var i = 0; i < MonsterArr.length; i++) {
         let monster = MonsterArr[i];
-        // 走完一格计算一次路线
-        if (monster.mappingX * size == monster.offsetTop - borderWidth && monster.mappingY * size == monster.offsetLeft - borderWidth) {
-            // 目标坐标
-            let cMappingX = Math.round((character.offsetTop - borderWidth) / 50);
-            let cMappingY = Math.round((character.offsetLeft - borderWidth) / 50);
-            // 计算移动路线 传入怪物坐标及目标坐标
-            if (beforeMove) {
-                monster.route = beforeMove(monster.mappingX, monster.mappingY, cMappingX, cMappingY)
+        // 走完一格(当怪物的真实坐标的映射等于mappingX时认为走完一格)计算一次路线
+        if (monster.mappingX * lattice == monster.offsetTop - borderWidth && monster.mappingY * lattice == monster.offsetLeft - borderWidth) getRoute(monster,character,beforeMove);
+        // 蛇boss 头会往下执行 身体则不执行else if下面
+        if (monster._monsterName === 'snakeMonsterHeadRoute') {
+            monster.historyRoute.unshift({ X1: monster.offsetLeft - borderWidth, Y1: monster.offsetTop - borderWidth });
+            if (monster.historyRoute.length > snakeBodySpace) monster.historyRoute.pop();
+        } else if (monster._monsterName === 'snakeMonsterBodyRoute') {
+            if (monster.pre.historyRoute.length < snakeBodySpace) continue;
+            // 收集上一个节点的轨迹
+            if (monster.pre.historyRoute.length === snakeBodySpace) {
+                let result = monster.pre.historyRoute[monster.pre.historyRoute.length - 1]
+                monster.style.left = result.X1 + 'px';
+                monster.style.top = result.Y1 + 'px';
+                monster.historyRoute.unshift(result);
             }
+            if (monster.historyRoute.length > snakeBodySpace) monster.historyRoute.pop();
+            continue;
         }
-        monster.shootDirectionX = 0;
-        monster.shootDirectionY = 0;
-        // 怪物移动
-        // 路线第一个点的坐标
-        let routeX1 = monster.route[0].X1;
-        let routeY1 = monster.route[0].Y1;
-        // 怪物坐标
-        let monsterX = monster.mappingX;
-        let monsterY = monster.mappingY;
-        // 向上移动
-        if (monsterX > routeX1) {
-            monster.style.top = monster.offsetTop - borderWidth - speedMonster + "px";
-            // 移出轨道则进行修正
-            if (Math.abs(routeX1 * 50 - monster.offsetTop + borderWidth) - speedMonster < 0) {
-                monster.style.top = routeX1 * 50 + 'px';
-            }
-            monster.shootDirectionY = -1;
-        }
-        // 向下移动
-        if (monsterX < routeX1) {
-            monster.style.top = monster.offsetTop - borderWidth + speedMonster + "px";
-            // 移出轨道则进行修正
-            if (Math.abs(routeX1 * 50 - monster.offsetTop + borderWidth) - speedMonster < 0) {
-                monster.style.top = routeX1 * 50 + 'px';
-            }
-            monster.shootDirectionY = 1;
-        }
-        // 向左移动
-        if (monsterY > routeY1) {
-            monster.style.left = monster.offsetLeft - borderWidth - speedMonster + "px";
-            // 移出轨道则进行修正
-            if (Math.abs(routeY1 * 50 - monster.offsetLeft + borderWidth) - speedMonster < 0) {
-                monster.style.left = routeY1 * 50 + 'px';
-            }
-            monster.shootDirectionX = -1;
-        }
-        // 向右移动
-        if (monsterY < routeY1) {
-            monster.style.left = monster.offsetLeft - borderWidth + speedMonster + "px";
-            // 移出轨道则进行修正
-            if (Math.abs(routeY1 * 50 - monster.offsetLeft + borderWidth) - speedMonster < 0) {
-                monster.style.left = routeY1 * 50 + 'px';
-            }
-            monster.shootDirectionX = 1;
-        }
-
-        // 更新怪物坐标
-        if (monster.offsetTop - borderWidth == routeX1 * 50) {
-            monster.mappingX = routeX1;
-        }
-        if (monster.offsetLeft - borderWidth == routeY1 * 50) {
-            monster.mappingY = routeY1;
-        }
-
-
-
-        // 改变飞机朝向
-        if (monster.shootDirectionY == -1) {
-            if (monster.shootDirectionX == -1) {
-                monster.style.transform = 'rotate(180deg)';
-            } else if (monster.shootDirectionX == 0) {
-                monster.style.transform = 'rotate(-135deg)';
-            }
-            else if (monster.shootDirectionX == 1) {
-                monster.style.transform = 'rotate(-90deg)';
-            }
-        } else if (monster.shootDirectionY == 0) {
-            if (monster.shootDirectionX == -1) {
-                monster.style.transform = 'rotate(135deg)';
-            } else if (monster.shootDirectionX == 0) {
-                monster.style.transform = 'rotate(0deg)';
-            }
-            else if (monster.shootDirectionX == 1) {
-                monster.style.transform = 'rotate(-45deg)';
-            }
-        } else if (monster.shootDirectionY == 1) {
-            if (monster.shootDirectionX == -1) {
-                monster.style.transform = 'rotate(90deg)';
-            } else if (monster.shootDirectionX == 0) {
-                monster.style.transform = 'rotate(45deg)';
-            }
-            else if (monster.shootDirectionX == 1) {
-                monster.style.transform = 'rotate(0deg)';
-            }
-        }
+        // 移动(包括了改变方向)
+        move(monster,speedMonster);
         // 怪物攻击
         afterMove && afterMove(monster);
     }

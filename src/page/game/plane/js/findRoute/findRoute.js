@@ -1,18 +1,7 @@
-let mapArr = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+import { mapArr } from "../obstruction/obstruction.js";
+import { vineCageRoute } from "./snakeBossRoute.js";
+import { ableMoveTo, definedRoute } from "./utils.js";
+let originMap = mapArr.originMap;
 const copyArr = [];
 let list = [];
 // 计算8个方向的到目标的最小距离
@@ -26,7 +15,7 @@ function calculateRoute(start, X2, Y2) {
         if (X1 - 1 >= 0) {
             // 1表示只可以斜上计算 2表示既可以向上计算又可以向斜上计算
             // mapArr中-1表示已经计算
-            if (mapArr[X1 - 1][Y1] == 0) {
+            if (mapArr[X1 - 1][Y1] !== 1 && mapArr[X1 - 1][Y1] !== -1) {
                 flagu = 2;
             } else if (mapArr[X1 - 1][Y1] == -1) {
                 flagu = 1;
@@ -34,7 +23,7 @@ function calculateRoute(start, X2, Y2) {
         }
         // 右边
         if (Y1 + 1 < mapArr[X1].length) {
-            if (mapArr[X1][Y1 + 1] == 0) {
+            if (mapArr[X1][Y1 + 1] !== 1 && mapArr[X1][Y1 + 1] !== -1) {
                 flagr = 2;
             } else if (mapArr[X1][Y1 + 1] == -1) {
                 flagr = 1;
@@ -42,7 +31,7 @@ function calculateRoute(start, X2, Y2) {
         }
         // 下边
         if (X1 + 1 < mapArr.length) {
-            if (mapArr[X1 + 1][Y1] == 0) {
+            if (mapArr[X1 + 1][Y1] !== 1 && mapArr[X1 + 1][Y1] !== -1) {
                 flagd = 2;
             } else if (mapArr[X1 + 1][Y1] == -1) {
                 flagd = 1;
@@ -50,7 +39,7 @@ function calculateRoute(start, X2, Y2) {
         }
         // 左边
         if (Y1 - 1 >= 0) {
-            if (mapArr[X1][Y1 - 1] == 0) {
+            if (mapArr[X1][Y1 - 1] !== 1 && mapArr[X1][Y1 - 1] !== -1) {
                 flagl = 2;
             } else if (mapArr[X1][Y1 - 1] == -1) {
                 flagl = 1;
@@ -59,28 +48,28 @@ function calculateRoute(start, X2, Y2) {
         }
         // 右上最小距离
         if ((flagu == 1 || flagu == 2) && (flagr == 1 || flagr == 2)) {
-            if (mapArr[X1 - 1][Y1 + 1] == 0 && mapArr[X1 - 1][Y1 + 1] != -1) {
+            if (mapArr[X1 - 1][Y1 + 1] !== 1 && mapArr[X1 - 1][Y1 + 1] != -1) {
                 slanting(X1 - 1, Y1 + 1, X2, Y2, Math.sqrt(2), start);
                 mapArr[X1 - 1][Y1 + 1] = -1;
             }
         }
         // 右下最小距离
         if ((flagd == 1 || flagd == 2) && (flagr == 1 || flagr == 2)) {
-            if (mapArr[X1 + 1][Y1 + 1] == 0 && mapArr[X1 + 1][Y1 + 1] != -1) {
+            if (mapArr[X1 + 1][Y1 + 1] !== 1 && mapArr[X1 + 1][Y1 + 1] != -1) {
                 slanting(X1 + 1, Y1 + 1, X2, Y2, Math.sqrt(2), start);
                 mapArr[X1 + 1][Y1 + 1] = -1;
             }
         }
         // 左下最小距离
         if ((flagd == 1 || flagd == 2) && (flagl == 1 || flagl == 2)) {
-            if (mapArr[X1 + 1][Y1 - 1] == 0 && mapArr[X1 + 1][Y1 - 1] != -1) {
+            if (mapArr[X1 + 1][Y1 - 1] !== 1 && mapArr[X1 + 1][Y1 - 1] != -1) {
                 slanting(X1 + 1, Y1 - 1, X2, Y2, Math.sqrt(2), start);
                 mapArr[X1 + 1][Y1 - 1] = -1;
             }
         }
         // 左上最小距离
         if ((flagu == 1 || flagu == 2) && (flagl == 1 || flagl == 2)) {
-            if (mapArr[X1 - 1][Y1 - 1] == 0 && mapArr[X1 - 1][Y1 - 1] != -1) {
+            if (mapArr[X1 - 1][Y1 - 1] !== 1 && mapArr[X1 - 1][Y1 - 1] != -1) {
                 slanting(X1 - 1, Y1 - 1, X2, Y2, Math.sqrt(2), start);
                 mapArr[X1 - 1][Y1 - 1] = -1;
             }
@@ -205,26 +194,30 @@ function readMin() {
     return list[0];
 }
 
+
+
+
 // 传入怪物坐标及目标坐标
-export function findRoute(X1, Y1, X2, Y2) {
+export function findRoute(X1, Y1, X2, Y2, options = {}) {
+    // 每次计算路径先初始化mapArr地图
+    for (let i = 0; i < originMap.length; i++) {
+        for (let j = 0; j < originMap[0].length; j++) {
+            mapArr[i][j] = originMap[i][j];
+        }
+    }
+    let { random, skills, monster, character } = options;
     // 清空list(用来存放最小堆)
     list = [];
-    mapArr = [
-        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-        [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
     const route = [];
+    // 蛇发动技能后走这条路线
+    if (skills === 'vineCage') {
+        return vineCageRoute(monster, character, X1, Y1, X2, Y2, findRoute);
+    };
+    // 走自定义路线
+    if (random) {
+        route[0] = definedRoute(X1, Y1);
+        return route;
+    }
     // 将怪物的起始位置封装成一个对象
     let start = {
         X1,

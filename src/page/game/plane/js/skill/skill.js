@@ -11,8 +11,8 @@ const borderWidth = parseInt(getComputedStyle(document.body)['border-width']);
     skillsbox部分
              
 */
-const skill1 = document.querySelector('.skill1')
-const skill2 = document.querySelector('.skill2')
+const skill1 = document.querySelector('.skill1');
+const skill2 = document.querySelector('.skill2');
 const occlusionLeft1 = skill1.children[0].children[0];
 const occlusionRight1 = skill1.children[1].children[0];
 const occlusionLeft2 = skill2.children[0].children[0];
@@ -64,7 +64,7 @@ export function hellfire(obj) {
         let ideg = 360 / flag;
         occlusionLeft1.children[0].style.float = 'left';
         occlusionRight1.children[0].style.float = 'right';
-        cooling1.childNodes[0].innerHTML = flag+'s';
+        cooling1.childNodes[0].innerHTML = flag + 's';
         // 开始立刻进行冷却这样当flag=4时往3秒冷却当flag=3时往2秒冷却...
         function startcool() {
             deg1 += ideg;
@@ -124,7 +124,7 @@ export function fullScreenBombing(obj, callback) {
         let ideg = 360 / flag;
         occlusionLeft2.children[0].style.float = 'left';
         occlusionRight2.children[0].style.float = 'right';
-        cooling2.childNodes[0].innerHTML = flag+'s';
+        cooling2.childNodes[0].innerHTML = flag + 's';
         // 开始立刻进行冷却这样当flag=4时往3秒冷却当flag=3时往2秒冷却...
         function startcool() {
             deg1 += ideg;
@@ -159,5 +159,43 @@ export function fullScreenBombing(obj, callback) {
             }
             cooling2.childNodes[0].innerHTML = flag + 's';
         }, 1000);
+    }
+}
+
+// 藤蔓囚笼
+export function vineCage(monster, character, mapArr) {
+    let originMap = mapArr.originMap;
+    // 将对象周围围住
+    let characterLeft = character.offsetLeft - borderWidth, characterTop = character.offsetTop - borderWidth;
+    // character坐标映射成数组并且存入character中
+    let mappingX = Math.round(characterTop / mapArr.lattice), mappingY = Math.round(characterLeft / mapArr.lattice);
+    character.beVineCage = {
+        mappingX,
+        mappingY
+    };
+    let arr = [];
+    for (let i = mappingX - 3; i <= mappingX + 3; i++) {
+        arr.push(`
+            <div class="vineCage" style="left:${(mappingY - 3) * mapArr.lattice}px;top:${i * mapArr.lattice}px">1</div>
+            <div class="vineCage" style="left:${(mappingY + 3) * mapArr.lattice}px;top:${i * mapArr.lattice}px">1</div>
+        `);
+        if (mappingY - 3 >= 0) originMap[i][mappingY - 3] = 2;
+        if (mappingY + 3 < mapArr[0].length) originMap[i][mappingY + 3] = 2;
+    }
+    for (let i = mappingY - 3; i <= mappingY + 3; i++) {
+        arr.push(`
+            <div class="vineCage" style="left:${i * mapArr.lattice}px;top:${(mappingX - 3) * mapArr.lattice}px">1</div>
+            <div class="vineCage" style="left:${i * mapArr.lattice}px;top:${(mappingX + 3) * mapArr.lattice}px">1</div>
+        `);
+        if (mappingX - 3 >= 0) originMap[mappingX - 3][i] = 2;
+        if (mappingX + 3 < mapArr.length) originMap[mappingX + 3][i] = 2;
+    }
+    // 将特效渲染
+    body.insertAdjacentHTML('beforeend', arr.join(''));
+    upDataState(monster);
+    // 改变monster的状态
+    function upDataState(monster) {
+        if (!monster.state) monster.state = {};
+        monster.state.skills = 'vineCage';
     }
 }

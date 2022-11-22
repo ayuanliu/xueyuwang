@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单词吧</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+    
+    <div class="tools">
+        <div class="selectfile">
+            <input type="file" accept=".txt" name="file" id="file" class="clearfix">
+        </div>
+        <div class="btnbox">
+            <div class="searchbtn">
+                <div class="content">搜索</div>
+                <div class="searchbox">
+                    <textarea name="" id="" spellcheck="false"></textarea>
+                    <div class="search">搜索</div>
+                </div>
+            </div>
+            <div class="notfoundbtn">
+                <div class="content">
+                    未搜索到
+                </div>
+                <ul class="words">
+                </ul>
+            </div>
+        </div>    
+    </div>
+    <div class="go">
+        <div class="last">←</div><span>0</span>/<span>0</span><div class="next">→</div>
+    </div>
+    <div class="wordbox clearfix"></div>
+</body>
+</html>

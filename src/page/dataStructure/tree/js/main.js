@@ -33,10 +33,10 @@ function createDom() {
     var btnHtmlExplain = document.getElementById("btnHtmlExplain");
     /**************************************************************/
     // 兼容火狐写法
-    myHtml.onwheel = function(event){
-        if(event.wheelDelta < 0 || event.detail < 0){
+    myHtml.onwheel = function (event) {
+        if (event.wheelDelta < 0 || event.detail < 0) {
             myHtml.scrollTop += 20;
-        }else if(event.wheelDelta > 0){
+        } else if (event.wheelDelta > 0) {
             myHtml.scrollTop -= 20;
         }
         return false;
@@ -46,9 +46,9 @@ function createDom() {
 
     btnHtmlExplain.onclick = function () {
         // 如果html为空则初始化
-        if(myHtml.value==''){
+        if (myHtml.value == '') {
             myHtml.value =
-`<html>
+                `<html>
     <head>
         <title></title>
     </head>
